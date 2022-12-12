@@ -1,0 +1,76 @@
+* {
+    padding: 0;
+    margin: 0;
+  }
+  
+  header {
+    background-color: black;
+    height: 130px;
+  }
+  body {
+    
+    /* Pour l'url de l'image, sur google, click droit puis "copy image adress" */
+  }
+  
+  .titre {
+    color: bisque;
+    text-align: center;
+    font-size: 80px;
+  }
+  
+  .titre1 {
+    color: rgb(255, 255, 255);
+    background-color: rgba(0, 0, 0, 0.849);
+    font-size: 20px;
+    position: absolute;
+    right: 600px;
+    
+  }
+  .titre2 {
+    color: rgb(255, 255, 255);
+    background-color: rgba(0, 0, 0, 0.849);
+    font-size: 20px;
+    position: absolute;
+    right: 350px;
+  }
+  .titre3 {
+    color: rgb(255, 255, 255);
+    background-color: rgba(0, 0, 0, 0.849);
+    font-size: 20px;
+    position: absolute;
+    right: 250px;
+  }
+  .titre4 {
+    color: rgb(255, 255, 255);
+    background-color: rgba(0, 0, 0, 0.849);
+    font-size: 20px;
+    position: absolute;
+    right: 100px;
+  }
+  .titre5 {
+    color: rgb(255, 255, 255);
+    background-color: rgba(0, 0, 0, 0.849);
+    font-size: 20px;
+    position: absolute;
+    right: 25px;
+  }
+  .titre1:hover, .titre2:hover, .titre3:hover, .titre4:hover, .titre5:hover {
+    background-color: rgb(0, 17, 255);
+    border-radius: 10px;
+    transition: 0.5s;
+    text-decoration: underline red;
+    
+  }
+  .home {
+    position: absolute;
+    right: 110px;
+    bottom: 40px;
+    width:500px;
+  }
+table, th, td {
+    color: yellow;
+    background-color: gray;
+    width: 50%;
+    border: 2px solid black;
+    border-radius: 10px;
+}
