@@ -3,8 +3,8 @@ import ProjectCard from '../components/ProjectCard'
 
 // Import images et videos
 // Strangeraria
-import strangerariaPoster from '../assets/images/imgstrangeraria.jpg';
-//import strangerariaVideo  from '../assets/videos/videostrangeraria.mp4';
+import strangerariaPoster from '../assets/images/imgStrangeraria.jpg';
+//import strangerariaVideo  from '../assets/videos/videoStrangeraria.mp4';
 // Zombie Fps
 import zombieFpsPoster from '../assets/images/imgZombieFps.jpg';
 import zombieFpsVideo  from '../assets/videos/videoZombieFps.mp4';
