@@ -82,7 +82,7 @@ const PROJECTS: Project[] = [
   {
     id: 'slime',
     title: 'Slime 3D',
-    role: 'C++ • DirectX12 • dev Gameplay',
+    role: 'C++ • DirectX12 • Dev Gameplay',
     desc: "Jeu d'aventure basé sur notre propre moteur de jeu 3D",
     itchUrl: undefined,
     githubUrl: 'https://github.com/exootik/04-25-Slime3D',
@@ -94,7 +94,7 @@ const PROJECTS: Project[] = [
   {
     id: 'moteur',
     title: 'Moteur de jeu 3D',
-    role: 'C++ • DirectX12 • dev Moteur',
+    role: 'C++ • DirectX12 • Dev Moteur',
     desc: "Création d'un moteur de jeu 3D avec DirectX12",
     itchUrl: undefined,
     githubUrl: 'https://github.com/exootik/03-25-Creation-MoteurDeJeu3D',

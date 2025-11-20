@@ -43,6 +43,12 @@ const ITEMS: Item[] = [
     desc: "Expérience utile pour apprendre à me connaître, réorientation assumée", 
     date: '2021 - 2022' 
   },
+  { id: 'interim', 
+    title: 'Interim',
+    role: 'Polyvalence - Manutention - Ponctualité',
+    desc: 'Travail physique pendant ma réorientation ainsi que tous les étés', 
+    date: '2022' 
+  },
   { id: 'bts', 
     title: 'BTS SIO', 
     role: 'Base solides en dev full stack',
@@ -51,25 +57,25 @@ const ITEMS: Item[] = [
   },
   { id: 'stageBiopath', 
     title: 'Stage Biopath',
-    role: 'Developpement - Laravel - php',
+    role: 'Laravel - php - Git',
     desc: 'Stage dans une équipe de taille moyenne dans un laboratoire', 
     date: '2023' 
   },
   { id: 'stageCapgemini', 
     title: 'Stage Capgemini',
-    role: "Developpement - javaScript - Gestion d'équipe",
+    role: "javaScript - Gestion d'équipe - Communication",
     desc: 'Stage dans une grande entreprise', 
     date: '2024' 
   },
   { id: 'stageShopify', 
     title: 'Stage Sellify (App Shopify)',
-    role: 'Developpement - TypeScript - Autonomie',
-    desc: 'Stage dans une startup qui créer des applications Shopify', 
+    role: 'TypeScript - Autonomie - Gestion des priorités',
+    desc: 'Stage dans une startup qui développe des applications Shopify', 
     date: '2025' 
   },
   { id: 'gaming', 
     title: 'Bachelor dev jeux vidéo', 
-    role: "Dev gameplay - gestion de projet - travail d'équipe", 
+    role: "Dev gameplay - Gestion de projet - Travail d'équipe", 
     desc: 'Bachelor orienté jeux vidéo, pédagogie par projets', 
     date: '2024 - 2026' }
 ]
