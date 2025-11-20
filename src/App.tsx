@@ -1,6 +1,6 @@
 // src/App.tsx
 import { useEffect, useState } from 'react'
-import './index.css'
+import './index2.css'
 
 import Header from './components/Header'
 import Footer from './components/Footer'

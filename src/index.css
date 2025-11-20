@@ -1,10 +1,3 @@
-/* ============================================================
-   src/index.css (mise à jour)
-   - Unifie placement graphique de .project .meta et .timeline-date
-   - timeline-date positionnée en bas à droite (comme .project .meta)
-   - Mobile: les deux deviennent statiques/empilés
-   ============================================================ */
-
 /* -------------------- TOKENS / VARIABLES -------------------- */
 :root{
   --bg:#0f1115;
@@ -61,8 +54,17 @@ body{
 .footer{margin-top:48px;padding-top:18px;border-top:1px solid rgba(255,255,255,0.03)}
 .footer-inner{display:flex;align-items:center;justify-content:space-between}
 .footer-links{display:flex;gap:12px;align-items:center}
-.icon-link{display:inline-flex;padding:8px;border-radius:8px;background:rgba(255,255,255,0.02);color:var(--muted);text-decoration:none}
-
+.icon-link img {
+  display: block;
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+}
+.icon-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
 /* -------------------- PROJECT: meta placement (absolute) -------------------- */
 .project {
   position: relative;
@@ -142,7 +144,7 @@ body{
   width: 100%;
   max-width: 900px;
   display: flex;
-  flex-direction: column-reverse; /* garde la logique visuelle : bas = plus ancien */
+  flex-direction: column-reverse;
   gap: 28px;
   padding: 32px 12px;
 }
@@ -189,12 +191,12 @@ body{
   background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
   border: 1px solid rgba(255,255,255,0.04);
   padding: 14px 16px;
-  padding-bottom: 56px; /* réserve la même zone que .project pour la date */
+  padding-bottom: 56px;
   border-radius: 12px;
   width: calc(50% - 70px);
   max-width: 420px;
   box-shadow: 0 6px 18px rgba(0,0,0,0.45);
-  position: relative; /* important: positionner la date relative à la carte */
+  position: relative;
 }
 
 /* en-tête carte */
@@ -222,7 +224,7 @@ body{
   box-shadow: 0 4px 12px rgba(92,80,200,0.25), 0 0 0 6px rgba(124,92,255,0.06);
   border: 2px solid rgba(255,255,255,0.06);
   position: relative;
-  z-index: 3; /* s'assurer qu'il soit au dessus de la branche centrale */
+  z-index: 3;
 }
 
 .timeline-item.left  .timeline-card      { order: 1; margin-right: 8px;  }

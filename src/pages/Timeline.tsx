@@ -1,13 +1,11 @@
-// src/pages/Timeline.tsx
-import React from 'react'
-import '../index.css' // assure-toi que ton index.css contient les styles fournis ci-dessous
+import '../index2.css'
 
 type Item = {
   id: string
   title: string
   role?: string
   desc?: string
-  date?: string // ex: "2022 → 2024"
+  date?: string 
 }
 
 /**
@@ -42,7 +40,7 @@ const ITEMS: Item[] = [
   { id: 'fac', 
     title: "Fac d'économie", 
     role: 'Economie - Développement personnel', 
-    desc: "Expérience utile pour apprendre a me connaître, réorientation assumée", 
+    desc: "Expérience utile pour apprendre à me connaître, réorientation assumée", 
     date: '2021 - 2022' 
   },
   { id: 'bts', 
@@ -51,9 +49,27 @@ const ITEMS: Item[] = [
     desc: 'Formation technique en systèmes informatiques et réseaux', 
     date: '2022 - 2024' 
   },
+  { id: 'stageBiopath', 
+    title: 'Stage Biopath',
+    role: 'Developpement - Laravel - php',
+    desc: 'Stage dans une équipe de taille moyenne dans un laboratoire', 
+    date: '2023' 
+  },
+  { id: 'stageCapgemini', 
+    title: 'Stage Capgemini',
+    role: "Developpement - javaScript - Gestion d'équipe",
+    desc: 'Stage dans une grande entreprise', 
+    date: '2024' 
+  },
+  { id: 'stageShopify', 
+    title: 'Stage Sellify (App Shopify)',
+    role: 'Developpement - TypeScript - Autonomie',
+    desc: 'Stage dans une startup qui créer des applications Shopify', 
+    date: '2025' 
+  },
   { id: 'gaming', 
     title: 'Bachelor dev jeux vidéo', 
-    role: "dev gameplay - gestion de projet - travail d'équipe", 
+    role: "Dev gameplay - gestion de projet - travail d'équipe", 
     desc: 'Bachelor orienté jeux vidéo, pédagogie par projets', 
     date: '2024 - 2026' }
 ]
@@ -66,19 +82,12 @@ export default function Timeline(){
       <div className="timeline-wrapper" aria-hidden={false}>
         <div className="timeline">
           {ITEMS.map((it, index) => {
-            /**
-             * Pour garantir l'alternance visuelle (un sur deux à droite/gauche),
-             * on calcule le "visualIndex" correspondant à la position visuelle
-             * du composant (0 = bas le plus ancien). Comme le CSS utilise
-             * column-reverse, la position visuelle est (ITEMS.length - 1 - index).
-             */
             const visualIndex = ITEMS.length - 1 - index
             const side = visualIndex % 2 === 0 ? 'right' : 'left'
 
             return (
               <div key={it.id} className={`timeline-item ${side}`}>
                 <div className="timeline-item-inner">
-                  {/* Carte contenant les informations */}
                   <div className="timeline-card">
                     <div className="timeline-card-head">
                       <div>
@@ -90,7 +99,6 @@ export default function Timeline(){
                     {it.desc && <div className="timeline-detail" style={{marginTop:8}}>{it.desc}</div>}
                   </div>
 
-                  {/* Connecteur visuel vers la branche */}
                   <div className="timeline-connector" aria-hidden="true">
                     <span className="timeline-dot" />
                   </div>
