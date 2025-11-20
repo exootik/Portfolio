@@ -80,10 +80,12 @@ const ITEMS: Item[] = [
     date: '2024 - 2026' }
 ]
 
-export default function Timeline(){
+export default function Timeline({ id = 'timeline' }: { id?: string }) {
   return (
-    <section className="timeline-section">
-      <h2>Parcours</h2>
+    <section id={id} className="section-block section-timeline" tabIndex={-1}>
+      <div className="section-title">
+        <h2>Parcours</h2>
+      </div>
 
       <div className="timeline-wrapper" aria-hidden={false}>
         <div className="timeline">

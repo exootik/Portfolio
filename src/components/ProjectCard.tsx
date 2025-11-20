@@ -29,7 +29,11 @@ export default function ProjectCard({ title, role, desc, itchUrl, githubUrl, pos
       {hasVideo && showVideo ? (
         <video className="media" src={videoUrl} poster={poster} controls muted playsInline />
       ) : (
-        <img className="media" src={poster} alt={title} />
+        // <img className="media" src={poster} alt={title} />
+        <>
+          <img className={`media ${poster ? 'pixel-frame' : ''}`} src={poster} alt={title} />
+          <div className="pixel-overlay" aria-hidden="true" />
+        </>
       )}
 
       <h3 style={{marginTop:12}}>{title}</h3>
@@ -38,7 +42,7 @@ export default function ProjectCard({ title, role, desc, itchUrl, githubUrl, pos
 
       <div style={{display:'flex', gap:8, marginTop:10}}>
         {itchUrl && (
-          <a className="btn" href={itchUrl} target="_blank" rel="noreferrer">
+          <a className="btn pixel" href={itchUrl} target="_blank" rel="noreferrer">
             Jouer
           </a>
         )}
@@ -49,7 +53,7 @@ export default function ProjectCard({ title, role, desc, itchUrl, githubUrl, pos
           </button>
         )}
 
-{githubUrl && (
+        {githubUrl && (
           <a
             className="btn github"
             href={githubUrl}

@@ -1,4 +1,3 @@
-
 type Props = {
   page: 'home' | 'projects' | 'timeline'
   setPage: (p: 'home'|'projects'|'timeline') => void
