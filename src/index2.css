@@ -1,6 +1,4 @@
 /* -------------------- TOKENS / VARIABLES -------------------- */
-/* -> Fusionnez ces variables dans votre :root si vous avez déjà un :root.
-      Les nouvelles variables Pixel-Neo sont marquées 'pixel-*' et sont optionnelles. */
       :root{
         --bg:#0f1115;
         --panel:#121416;
@@ -17,12 +15,12 @@
         --desc-size: 0.96rem;
         --meta-size: 0.85rem;
       
-        /* Pixel-Neo additions (non obligatoires, utilisent la même base visuelle) */
-        --pixel-accent: #ffd34d;       /* accent rétro jaune */
-        --pixel-border: 2px;          /* bordure pixel optionnelle */
-        --pixel-grid-size: 6px;       /* taille overlay pixel */
-        --pixel-shadow: 6px 6px 0 rgba(0,0,0,0.45); /* shadow blocky */
-        --pixel-radius: 8px;          /* alternative légèrement plus carrée */
+        /* Pixel-Neo additions */
+        --pixel-accent: #ffd34d;
+        --pixel-border: 2px;
+        --pixel-grid-size: 6px;
+        --pixel-shadow: 6px 6px 0 rgba(0,0,0,0.45);
+        --pixel-radius: 8px;
       }
       
       /* -------------------- RESET & BASE -------------------- */
@@ -32,6 +30,9 @@
         margin:0;
         font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
         background: linear-gradient(180deg, #0b0c0f 0%, #0f1115 100%);
+        background-attachment: fixed;
+        background-repeat: no-repeat;
+        background-size: cover;
         color:#e6eef8;
         -webkit-font-smoothing:antialiased;
         -moz-osx-font-smoothing:grayscale;
@@ -67,7 +68,6 @@
       /* Slight pixel-ish accent in the logo when theme active */
       body.pixel-neo .logo{ color: var(--pixel-accent); }
       body.pixel-neo .logo::after{
-        /* tiny two-block accent */
         content: "";
         display:inline-block;
         width:8px;
@@ -110,7 +110,7 @@
       /* avatar helper: to get pixelated look if you pass low-res image */
       .avatar-pixel{
         width:100%;
-        image-rendering: pixelated;  /* nearest-neighbor upscaling for pixel art */
+        image-rendering: pixelated;
         image-rendering: crisp-edges;
         border-radius:8px;
         display:block;
@@ -352,7 +352,7 @@
       
       /* Pixel-Neo timeline dot alternative (opt-in) */
       body.pixel-neo .timeline-dot {
-        border-radius: 3px; /* slightly blocky */
+        border-radius: 3px;
         background: linear-gradient(180deg, var(--accent), var(--pixel-accent));
         box-shadow: var(--pixel-shadow);
       }
@@ -368,6 +368,89 @@
       .timeline .timeline-item.left  .timeline-item-inner { justify-content: flex-start; }
       .timeline .timeline-item.right .timeline-item-inner { justify-content: flex-end; }
       
+      /* -------------------- SECTIONS: stacked pages / backgrounds -------------------- */
+      /* Sections empilées : Accueil / Projets / Parcours
+        Chaque bloc a son background personnalisé pour bien délimiter les grandes parties. */
+
+      html { scroll-behavior: smooth; }
+
+      .section-block {
+        margin: 36px 0;
+        padding: 28px;
+        border-radius: 12px;
+        background-color: rgba(255,255,255,0.015);
+        border: 1px solid rgba(255,255,255,0.03);
+        box-shadow: 0 8px 26px rgba(0,0,0,0.45);
+      }
+
+      /* Section title — grand titre visuel pour chaque bloc */
+      .section-title {
+        display:flex;
+        align-items:center;
+        gap:12px;
+        margin-bottom:12px;
+      }
+      .section-title h1, .section-title h2 {
+        margin:0;
+        font-size: clamp(1.6rem, 2.6vw, 2.6rem);
+        letter-spacing: -0.02em;
+        color: #ffffff;
+        text-shadow: 0 6px 20px rgba(0,0,0,0.45);
+        font-weight:800;
+      }
+
+      /* Specific backgrounds — small variations to clearly separate blocks */
+      .section-hero {
+        border-color: rgba(124,92,255,0.06);
+        background-image: linear-gradient(180deg, rgba(124,92,255,0.01), transparent 25%);
+        background-repeat: no-repeat;
+      }
+
+      .section-projects {
+        border-color: rgba(95,177,255,0.04);
+        background-image: linear-gradient(180deg, rgba(95,177,255,0.006), transparent 25%);
+        background-repeat: no-repeat;
+      }
+
+      .section-timeline {
+        background-color: rgba(10,14,14,0.55);
+        border: 1px solid rgba(124,92,255,0.04);
+      
+        background-image: radial-gradient(circle at 8% 12%, rgba(124,92,255,0.015), transparent 8%);
+        background-repeat: no-repeat;
+        background-size: cover;
+      }
+
+      /* Slight inset to visually separate the element from page background */
+      .section-block:focus { outline: none; box-shadow: 0 12px 40px rgba(0,0,0,0.6); }
+
+      /* Pixel-Neo optional accents (opt-in with body.pixel-neo) */
+      body.pixel-neo .section-block {
+        border-radius: var(--pixel-radius);
+        border: var(--pixel-border) solid rgba(255,255,255,0.03);
+        box-shadow: var(--pixel-shadow);
+      }
+      body.pixel-neo .section-title h1, body.pixel-neo .section-title h2 {
+        font-family: "Press Start 2P", monospace;
+        letter-spacing: 1px;
+        font-size: clamp(1.1rem, 2.8vw, 1.8rem);
+        color: var(--pixel-accent);
+        text-shadow: none;
+      }
+
+      /* Tweak header nav when section active (more visible) */
+      .navbtn.active {
+        color: #0b0b0b;
+        background: linear-gradient(90deg, var(--pixel-accent), #ffbf5c);
+        box-shadow: 0 8px 20px rgba(0,0,0,0.45);
+      }
+
+      /* Responsive: reduce section padding on small screens */
+      @media (max-width: 760px) {
+        .section-block { padding: 18px; margin: 20px 0; border-radius: 10px; }
+        .section-title h1, .section-title h2 { font-size: 1.4rem; }
+      }
+
       /* -------------------- TYPOGRAPHIE / COMMUN TIMELINE & PROJECT -------------------- */
       /* Ces règles s'appliquent aux deux composants (timeline & project)
          pour garder une cohérence visuelle tout en restant modifiables séparément */

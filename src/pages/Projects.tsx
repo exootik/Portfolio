@@ -153,11 +153,15 @@ const PROJECTS: Project[] = [
   }
 ]
 
-export default function Projects() {
+export default function Projects({ id = 'projects' }: { id?: string }) {
   return (
-    <section id="projects">
-      <div style={{display:'flex', justifyContent:'space-between', alignItems:'center', gap:12}}>
+    <section id={id} className="section-block section-projects" tabIndex={-1}>
+      <div className="section-title">
         <h2>Projets</h2>
+      </div>
+
+      <div style={{display:'flex', justifyContent:'space-between', alignItems:'center', gap:12}}>
+        <div />
       </div>
 
       <div className="grid" style={{marginTop:16}}>
