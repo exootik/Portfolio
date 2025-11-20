@@ -4,16 +4,16 @@ import ProjectCard from '../components/ProjectCard'
 // Import images et videos
 // Strangeraria
 import strangerariaPoster from '../assets/images/imgStrangeraria.jpg';
-//import strangerariaVideo  from '../assets/videos/videoStrangeraria.mp4';
+import strangerariaVideo  from '../assets/videos/videoStrangeraria.mp4';
 // Zombie Fps
 import zombieFpsPoster from '../assets/images/imgZombieFps.jpg';
 import zombieFpsVideo  from '../assets/videos/videoZombieFps.mp4';
 // Pokemon-like
 import pokemonPoster from '../assets/images/imgPokemon.jpg';
-//import pokemonVideo  from '../assets/videos/videoPokemon.mp4';
+import pokemonVideo  from '../assets/videos/videoPokemon.mp4';
 // Slime
 import slime3DPoster from '../assets/images/imgSlime3D.jpg';
-//import slime3DVideo  from '../assets/videos/videoSlime3D.mp4';
+import slime3DVideo  from '../assets/videos/videoSlime3D.mp4';
 // Moteur3D
 import moteur3DPoster from '../assets/images/imgMoteur3D.jpg';
 import moteur3DVideo  from '../assets/videos/videoMoteur3D.mp4';
@@ -51,8 +51,7 @@ const PROJECTS: Project[] = [
     itchUrl: 'https://billetsimon.itch.io/strangeraria',
     githubUrl: 'https://github.com/exootik/11-25-TerrariaLike',
     poster: strangerariaPoster,
-    //videoUrl: strangerariaVideo,
-    videoUrl: undefined,
+    videoUrl: strangerariaVideo,
     date: 'Novembre 2025',
     duree: '1 semaine'
   },
@@ -76,8 +75,7 @@ const PROJECTS: Project[] = [
     itchUrl: undefined,
     githubUrl: 'https://github.com/exootik/09-25-PokeLike',
     poster: pokemonPoster,
-    //videoUrl: pokemonVideo,
-    videoUrl: undefined,
+    videoUrl: pokemonVideo,
     date: 'Septembre 2025',
     duree: '1 semaine'
   },
@@ -89,8 +87,7 @@ const PROJECTS: Project[] = [
     itchUrl: undefined,
     githubUrl: 'https://github.com/exootik/04-25-Slime3D',
     poster: slime3DPoster,
-    //videoUrl: slime3DVideo,
-    videoUrl: undefined,
+    videoUrl: slime3DVideo,
     date: 'Avril 2025',
     duree: '3 semaines'
   },
