@@ -72,7 +72,7 @@ const PROJECTS: Project[] = [
     id: 'pokemon-like',
     title: 'Pokemon-like',
     role: 'C# • Programmation • Sauvegarde',
-    desc: "Pokemon-like",
+    desc: "Jeu en console créé pour apprendre le C#",
     itchUrl: undefined,
     githubUrl: 'https://github.com/exootik/09-25-PokeLike',
     poster: pokemonPoster,
