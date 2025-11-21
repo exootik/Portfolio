@@ -22,6 +22,12 @@ export default function ProjectCard({ title, role, desc, itchUrl, githubUrl, pos
     if (hasVideo) setShowVideo(v => !v)
   }
 
+  const handleKeyOnMedia = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault()
+      handleToggle()
+    }
+  }
   const meta = [date, duree].filter(Boolean).join(' • ')
 
   return (
@@ -29,9 +35,24 @@ export default function ProjectCard({ title, role, desc, itchUrl, githubUrl, pos
       {hasVideo && showVideo ? (
         <video className="media" src={videoUrl} poster={poster} controls muted playsInline />
       ) : (
-        // <img className="media" src={poster} alt={title} />
         <>
-          <img className={`media ${poster ? 'pixel-frame' : ''}`} src={poster} alt={title} />
+          {/* Si on a une vidéo on transforme l'image en "bouton" cliquable/accessible */}
+          {hasVideo ? (
+            <button
+              type="button"
+              className={`media-button ${poster ? 'pixel-frame' : ''}`}
+              onClick={handleToggle}
+              onKeyDown={handleKeyOnMedia}
+              aria-pressed={showVideo}
+              aria-label={showVideo ? `Afficher l'image de ${title}` : `Voir la vidéo de ${title}`}
+            >
+              <img className="media" src={poster} alt={title} />
+            </button>
+          ) : (
+            /* sinon on affiche une image statique */
+            <img className={`media ${poster ? 'pixel-frame' : ''}`} src={poster} alt={title} />
+          )}
+
           <div className="pixel-overlay" aria-hidden="true" />
         </>
       )}

@@ -21,8 +21,15 @@
         --pixel-grid-size: 6px;
         --pixel-shadow: 6px 6px 0 rgba(0,0,0,0.45);
         --pixel-radius: 8px;
+        
+        --header-height: 64px;
       }
-      
+
+      .section-block,
+      #home, #projects, #timeline {
+        scroll-margin-top: calc(var(--header-height) + 4px);
+      }
+
       /* -------------------- RESET & BASE -------------------- */
       *{box-sizing:border-box}
       html,body,#root{height:100%}
@@ -30,14 +37,14 @@
         margin:0;
         font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
         background: linear-gradient(180deg, #0b0c0f 0%, #0f1115 100%);
-        background-attachment: fixed;
+        background-attachment: fixed; 
         background-repeat: no-repeat;
         background-size: cover;
         color:#e6eef8;
         -webkit-font-smoothing:antialiased;
         -moz-osx-font-smoothing:grayscale;
       }
-      
+        
       /* ---------- Pixel-Neo optional: subtle pixel grid overlay (opt-in with body.pixel-neo) ---------- */
       body.pixel-neo::after{
         content: "";
@@ -62,14 +69,48 @@
       
       /* -------------------- LAYOUT / HEADER / HERO -------------------- */
       .container{max-width:1100px;margin:0 auto;padding:32px}
-      .header{display:flex;align-items:center;justify-content:space-between;gap:16px}
+      .header {
+        position: fixed;
+        top: 0; /* collé tout en haut */
+        left: 50%;
+        transform: translateX(-50%) translateY(0);
+        width: calc(100% - 64px);
+        max-width: 1100px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 12px 14px;
+        z-index: 1200;
+      
+        /* Visuel "propre" similaire à avant — fond solide (utilise ta variable :root) */
+        background: var(--panel); /* --panel: #121416 dans ton :root */
+        color: inherit;
+        border: 1px solid rgba(255,255,255,0.03);
+        border-radius: 8px; /* optionnel : garde un léger arrondi */
+        box-shadow: none; /* on retire l'ombre lourde */
+        transition: transform 220ms cubic-bezier(.2,.9,.2,1), opacity 180ms ease;
+        will-change: transform;
+      }      
+
+      /* Hidden state: remonte hors du viewport (visuellement caché) */
+      .header.hidden {
+        transform: translateX(-50%) translateY(-120%);
+        pointer-events: none;
+        opacity: 0;
+      }
+
+      .header:focus-within {
+        transform: translateX(-50%) translateY(0);
+        pointer-events: auto;
+        opacity: 1;
+      }
+      
       .logo{display:flex;align-items:center;gap:10px;font-weight:700;color:var(--accent)}
       
       /* Slight pixel-ish accent in the logo when theme active */
       body.pixel-neo .logo{ color: var(--pixel-accent); }
       body.pixel-neo .logo::after{
-        content: "";
-        display:inline-block;
         width:8px;
         height:8px;
         background:var(--pixel-accent);
@@ -122,6 +163,28 @@
       .project:hover{ transform: translateY(-6px); box-shadow: 0 8px 30px rgba(0,0,0,0.6); }
       .project .media{ width:100%; height:160px; object-fit:cover; border-radius:8px; background:#000; }
       
+      /* bouton image: retire les styles natifs et garde l'apparence de l'image */
+      .media-button {
+        display: block;
+        width: 100%;
+        height: 160px;
+        padding: 0;
+        margin: 0;
+        border: 0;
+        background: transparent;
+        cursor: pointer;
+        line-height: 0;
+      }
+
+      /* garder le même style de media (img) */
+      .media-button .media {
+        display: block;
+        width: 100%;
+        height: 160px;
+        object-fit: cover;
+        border-radius: 8px;
+      }
+
       /* Pixel-Neo optional poster frame (apply class pixel-frame to <img> when desired) */
       .pixel-frame{
         border: 3px solid rgba(0,0,0,0.65);
@@ -159,26 +222,63 @@
       
       /* Footer / icons — keep same layout but slightly larger icons for pixel feel */
       .footer{margin-top:48px;padding-top:18px;border-top:1px solid rgba(255,255,255,0.03)}
-      .footer-inner{display:flex;align-items:center;justify-content:space-between}
-      .footer-links{display:flex;gap:12px;align-items:center}
-      .icon-link img {
-        display: block;
-        width: 30px;
-        height: 30px;
-        object-fit: contain;
+      .footer-inner {
+        max-width: 1100px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        position: relative;
+        padding: 8px 16px;
       }
-      .icon-link {
-        display: inline-flex;
+
+      .footer-left {
+        position: absolute;
+        left: 16px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--muted);
+        font-size: 0.95rem;
+      }
+
+      /* -------------------- Footer icons ------------------------------- */
+
+      .footer-links {
+        display: flex;
+        gap: 14px;
         align-items: center;
         justify-content: center;
       }
+
+      /* agrandir et centrer les icônes dans le footer */
+      .footer .icon-link {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 6px; 
+        border-radius: 50%;
+        background: transparent; 
+      }
+
+      .footer .icon-link img {
+        width: 44px;  
+        height: 44px;
+        object-fit: contain;
+        border-radius: 50%; 
+        background: transparent;
+        padding: 0;
+        box-shadow: 0 6px 18px rgba(0,0,0,0.35); 
+        border: 1px solid rgba(255,255,255,0.03);
+      }
       
       /* Pixel-Neo icon styling when theme active */
-      body.pixel-neo .icon-link img{
-        filter: drop-shadow(4px 4px 0 rgba(0,0,0,0.45));
-        border-radius:4px;
-        background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-        padding:6px;
+      body.pixel-neo .icon-link,
+      body.pixel-neo .icon-link img {
+        background: transparent !important;
+        padding: 0 !important;
+        filter: none !important; 
+        box-shadow: 0 6px 18px rgba(0,0,0,0.35); 
       }
       
       /* -------------------- PROJECT: meta placement (absolute) -------------------- */
@@ -447,8 +547,25 @@
 
       /* Responsive: reduce section padding on small screens */
       @media (max-width: 760px) {
+        .header {
+          left: 12px;
+          right: 12px;
+          width: auto;
+          transform: translateX(0) translateY(0);
+          border-radius: 6px;
+          padding: 10px 12px;
+        }
+        .header.hidden {
+          transform: translateY(-120%);
+        }
         .section-block { padding: 18px; margin: 20px 0; border-radius: 10px; }
         .section-title h1, .section-title h2 { font-size: 1.4rem; }
+
+        .footer .icon-link img {
+          width: 36px;
+          height: 36px;
+        }
+        .footer .icon-link { padding: 4px; }
       }
 
       /* -------------------- TYPOGRAPHIE / COMMUN TIMELINE & PROJECT -------------------- */
@@ -531,6 +648,23 @@
         /* Projects: adapt width + meta placement */
         .project { width: calc(100% - 80px); max-width: 100%; padding-bottom: 16px; }
         .project .meta { position: static; display: block; margin-top: 8px; text-align: right; white-space: normal; pointer-events: auto; }
+
+        .footer-inner {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 8px;
+          padding: 12px;
+        }
+        .footer-left {
+          position: static;
+          transform: none;
+          order: 0;
+          text-align: center;
+        }
+        .footer-links {
+          order: 1;
+        }
       }
       
       /* petit tweak pour hero sur petits écrans */
