@@ -46,7 +46,7 @@ export default function App() {
   }, [])
 
   useEffect(() => {
-    document.title = page === 'home' ? 'Simon — Accueil' : page === 'projects' ? 'Simon — Projets' : 'Simon — Parcours'
+    document.title = page === 'home' ? 'Simon - Accueil' : page === 'projects' ? 'Simon - Projets' : 'Simon - Parcours'
   }, [page])
 
   return (
