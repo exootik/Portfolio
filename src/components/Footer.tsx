@@ -4,11 +4,6 @@ const ITCH_URL = 'https://billetsimon.itch.io'
 const MAILTO = 'mailto:simonbillet4@gmail.com'
 
 // Icons
-import iconLinkedin1 from '../assets/icons/linkedin1.png';
-import iconLinkedin2 from '../assets/icons/linkedin2.png';
-import iconGmail1 from '../assets/icons/gmail1.png';
-import iconGmail2 from '../assets/icons/gmail2.png';
-import iconJeux1 from '../assets/icons/jeux1.png';
 import iconGmailBleu from '../assets/icons/gmailBleu.png';
 import iconLinkedinBleu from '../assets/icons/linkedinBleu.png';
 import iconGithubBleu from '../assets/icons/test2.png';
