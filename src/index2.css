@@ -6,7 +6,6 @@
         --muted:#9aa4b2;
         --glass: rgba(255,255,255,0.04);
       
-        /* design tokens additionnels */
         --card-radius: 12px;
         --card-padding: 14px 16px;
         --card-gap: 8px;
@@ -15,7 +14,6 @@
         --desc-size: 0.96rem;
         --meta-size: 0.85rem;
       
-        /* Pixel-Neo additions */
         --pixel-accent: #ffd34d;
         --pixel-border: 2px;
         --pixel-grid-size: 6px;
@@ -45,7 +43,6 @@
         -moz-osx-font-smoothing:grayscale;
       }
         
-      /* ---------- Pixel-Neo optional: subtle pixel grid overlay (opt-in with body.pixel-neo) ---------- */
       body.pixel-neo::after{
         content: "";
         position: fixed;
@@ -60,7 +57,6 @@
         z-index: 9998;
       }
       
-      /* small utility pixel font — optional, use where you want a retro label */
       .pixel-font {
         font-family: "Press Start 2P", monospace;
         font-size: 10px;
@@ -71,7 +67,7 @@
       .container{max-width:1100px;margin:0 auto;padding:32px}
       .header {
         position: fixed;
-        top: 0; /* collé tout en haut */
+        top: 0; 
         left: 50%;
         transform: translateX(-50%) translateY(0);
         width: calc(100% - 64px);
@@ -83,17 +79,15 @@
         padding: 12px 14px;
         z-index: 1200;
       
-        /* Visuel "propre" similaire à avant — fond solide (utilise ta variable :root) */
-        background: var(--panel); /* --panel: #121416 dans ton :root */
+        background: var(--panel);
         color: inherit;
         border: 1px solid rgba(255,255,255,0.03);
-        border-radius: 8px; /* optionnel : garde un léger arrondi */
-        box-shadow: none; /* on retire l'ombre lourde */
+        border-radius: 8px; 
+        box-shadow: none;
         transition: transform 220ms cubic-bezier(.2,.9,.2,1), opacity 180ms ease;
         will-change: transform;
       }      
 
-      /* Hidden state: remonte hors du viewport (visuellement caché) */
       .header.hidden {
         transform: translateX(-50%) translateY(-120%);
         pointer-events: none;
@@ -108,7 +102,6 @@
       
       .logo{display:flex;align-items:center;gap:10px;font-weight:700;color:var(--accent)}
       
-      /* Slight pixel-ish accent in the logo when theme active */
       body.pixel-neo .logo{ color: var(--pixel-accent); }
       body.pixel-neo .logo::after{
         width:8px;
@@ -122,7 +115,6 @@
       .navbtn{background:transparent;border:0;color:var(--muted);padding:8px 10px;border-radius:8px;font-weight:600;cursor:pointer}
       .navbtn.active{color:#fff;background:rgba(255,255,255,0.03)}
       
-      /* Pixel-Neo nav subtle alternative (opt-in when body.pixel-neo) */
       body.pixel-neo .navbtn{
         border: var(--pixel-border) solid rgba(255,255,255,0.03);
         border-radius:6px;
@@ -137,25 +129,27 @@
       
       .hero{display:flex;gap:28px;align-items:center;padding:48px 0}
       .hero .hero-left{flex:1}
-      .hero .hero-right{width:420px}
+      .hero .hero-right{width:300px}
       
-      .profile-card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:16px;border-radius:12px;border:1px solid rgba(255,255,255,0.03)}
+      .profile-card{
+        width:100%;
+        background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+        padding:16px;
+        border-radius:12px;
+        border:1px solid rgba(255,255,255,0.03)
+      }
       
-      /* optional profile pixel overlay when theme active */
       body.pixel-neo .profile-card{
         border-radius:var(--pixel-radius);
         border: var(--pixel-border) solid rgba(255,255,255,0.03);
         box-shadow: var(--pixel-shadow);
       }
       
-      /* avatar helper: to get pixelated look if you pass low-res image */
-      .avatar-pixel{
+       .avatar-pixel{
         width:100%;
-        image-rendering: pixelated;
-        image-rendering: crisp-edges;
         border-radius:8px;
         display:block;
-      }
+      } 
       
       /* -------------------- GRID / PROJECTS BASE -------------------- */
       .grid{display:grid;grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));gap:16px;margin-top:24px}
@@ -163,7 +157,6 @@
       .project:hover{ transform: translateY(-6px); box-shadow: 0 8px 30px rgba(0,0,0,0.6); }
       .project .media{ width:100%; height:160px; object-fit:cover; border-radius:8px; background:#000; }
       
-      /* bouton image: retire les styles natifs et garde l'apparence de l'image */
       .media-button {
         display: block;
         width: 100%;
@@ -176,7 +169,6 @@
         line-height: 0;
       }
 
-      /* garder le même style de media (img) */
       .media-button .media {
         display: block;
         width: 100%;
@@ -185,7 +177,6 @@
         border-radius: 8px;
       }
 
-      /* Pixel-Neo optional poster frame (apply class pixel-frame to <img> when desired) */
       .pixel-frame{
         border: 3px solid rgba(0,0,0,0.65);
         box-shadow: var(--pixel-shadow);
@@ -194,7 +185,6 @@
         image-rendering: pixelated;
       }
       
-      /* small pixel overlay for posters (opt-in element inside .project) */
       .pixel-overlay{
         position:absolute;
         left:12px; right:12px; top:12px;
@@ -205,11 +195,9 @@
       }
       .project:hover .pixel-overlay{ opacity:0.18; }
       
-      /* small tweak to keep original button style but add pixel variant */
       .btn{display:inline-block;padding:8px 12px;border-radius:8px;background:linear-gradient(90deg,var(--accent),#5fb1ff);color:#fff;text-decoration:none;font-weight:600;border:0}
       .muted{ color:var(--muted); font-size:0.95rem; }
       
-      /* Pixel-Neo button variant (opt-in) */
       .btn.pixel{
         padding:8px 12px;
         border-radius:6px;
@@ -220,7 +208,6 @@
         font-weight:700;
       }
       
-      /* Footer / icons — keep same layout but slightly larger icons for pixel feel */
       .footer{margin-top:48px;padding-top:18px;border-top:1px solid rgba(255,255,255,0.03)}
       .footer-inner {
         max-width: 1100px;
@@ -242,8 +229,6 @@
         font-size: 0.95rem;
       }
 
-      /* -------------------- Footer icons ------------------------------- */
-
       .footer-links {
         display: flex;
         gap: 14px;
@@ -251,7 +236,6 @@
         justify-content: center;
       }
 
-      /* agrandir et centrer les icônes dans le footer */
       .footer .icon-link {
         display: inline-flex;
         align-items: center;
@@ -272,7 +256,6 @@
         border: 1px solid rgba(255,255,255,0.03);
       }
       
-      /* Pixel-Neo icon styling when theme active */
       body.pixel-neo .icon-link,
       body.pixel-neo .icon-link img {
         background: transparent !important;
@@ -281,7 +264,6 @@
         box-shadow: 0 6px 18px rgba(0,0,0,0.35); 
       }
       
-      /* -------------------- PROJECT: meta placement (absolute) -------------------- */
       .project {
         position: relative;
         padding: 12px;
@@ -293,7 +275,6 @@
         overflow: hidden;
       }
       
-      /* la meta (date + durée) en bas à droite — style unifié */
       .project .meta {
         position: absolute;
         right: 12px;
@@ -305,7 +286,6 @@
         pointer-events: none;
       }
       
-      /* GitHub button variant */
       .btn.github {
         display: inline-flex;
         align-items: center;
@@ -326,7 +306,6 @@
         transform: translateY(-1px);
       }
       
-      /* responsive : sur très petits écrans on empile la meta sous le contenu */
       @media (max-width: 420px) {
         .project {
           padding-bottom: 16px;
@@ -365,7 +344,6 @@
         padding: 32px 12px;
       }
       
-      /* branche / ligne centrale */
       .timeline::before {
         content: "";
         position: absolute;
@@ -379,7 +357,6 @@
         z-index: 0;
       }
       
-      /* ligne d'un item (centrée) */
       .timeline-item {
         width: 100%;
         display: flex;
@@ -388,7 +365,6 @@
         z-index: 1;
       }
       
-      /* wrapper interne alignant la carte et le connecteur */
       .timeline-item-inner {
         width: 100%;
         display: flex;
@@ -398,11 +374,9 @@
         padding: 0 8px;
       }
       
-      /* meilleure spécificité pour éviter override par d'autres règles */
       .timeline .timeline-item.left  { justify-content: flex-start;  }
       .timeline .timeline-item.right { justify-content: flex-end;    }
       
-      /* carte */
       .timeline-card {
         background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
         border: 1px solid rgba(255,255,255,0.04);
@@ -415,23 +389,18 @@
         position: relative;
       }
       
-      /* Pixel-Neo timeline card tweak (opt-in) */
       body.pixel-neo .timeline-card{
         border-radius: var(--pixel-radius);
         border: var(--pixel-border) solid rgba(255,255,255,0.03);
         box-shadow: var(--pixel-shadow);
       }
       
-      /* en-tête carte */
       .timeline-card-head { display:flex; justify-content:space-between; align-items:center; gap:8px; }
       .timeline-title { font-weight:700; font-size:1.02rem; color: #fff; }
       .timeline-role { font-size:0.9rem; color:var(--muted); }
       
-      /* NOTE: timeline-date sera positionnée en bas à droite (hors head) pour matcher .project .meta */
-      /* détail */
       .timeline-detail { margin-top:8px; font-size:0.96rem; } 
       
-      /* connecteur & dot */
       .timeline-connector {
         width: 60px;
         display:flex;
@@ -450,27 +419,22 @@
         z-index: 3;
       }
       
-      /* Pixel-Neo timeline dot alternative (opt-in) */
       body.pixel-neo .timeline-dot {
         border-radius: 3px;
         background: linear-gradient(180deg, var(--accent), var(--pixel-accent));
         box-shadow: var(--pixel-shadow);
       }
       
-      /* timeline layout orders */
       .timeline-item.left  .timeline-card      { order: 1; margin-right: 8px;  }
       .timeline-item.left  .timeline-connector { order: 2; }
       
       .timeline-item.right .timeline-card      { order: 2; margin-left: 8px;   }
       .timeline-item.right .timeline-connector { order: 1; }
       
-      /* ré-assurance des alignements */
       .timeline .timeline-item.left  .timeline-item-inner { justify-content: flex-start; }
       .timeline .timeline-item.right .timeline-item-inner { justify-content: flex-end; }
       
       /* -------------------- SECTIONS: stacked pages / backgrounds -------------------- */
-      /* Sections empilées : Accueil / Projets / Parcours
-        Chaque bloc a son background personnalisé pour bien délimiter les grandes parties. */
 
       html { scroll-behavior: smooth; }
 
@@ -478,12 +442,11 @@
         margin: 36px 0;
         padding: 28px;
         border-radius: 12px;
-        background-color: rgba(255,255,255,0.015);
+        background-color: var(--panel);
         border: 1px solid rgba(255,255,255,0.03);
         box-shadow: 0 8px 26px rgba(0,0,0,0.45);
       }
 
-      /* Section title — grand titre visuel pour chaque bloc */
       .section-title {
         display:flex;
         align-items:center;
@@ -499,32 +462,29 @@
         font-weight:800;
       }
 
-      /* Specific backgrounds — small variations to clearly separate blocks */
       .section-hero {
         border-color: rgba(124,92,255,0.06);
-        background-image: linear-gradient(180deg, rgba(124,92,255,0.01), transparent 25%);
+        background-image: none;
         background-repeat: no-repeat;
       }
 
       .section-projects {
         border-color: rgba(95,177,255,0.04);
-        background-image: linear-gradient(180deg, rgba(95,177,255,0.006), transparent 25%);
+        background-image: none;
         background-repeat: no-repeat;
       }
 
       .section-timeline {
-        background-color: rgba(10,14,14,0.55);
+        background-color: var(--panel);
         border: 1px solid rgba(124,92,255,0.04);
       
-        background-image: radial-gradient(circle at 8% 12%, rgba(124,92,255,0.015), transparent 8%);
+        background-image: none;
         background-repeat: no-repeat;
         background-size: cover;
       }
 
-      /* Slight inset to visually separate the element from page background */
       .section-block:focus { outline: none; box-shadow: 0 12px 40px rgba(0,0,0,0.6); }
 
-      /* Pixel-Neo optional accents (opt-in with body.pixel-neo) */
       body.pixel-neo .section-block {
         border-radius: var(--pixel-radius);
         border: var(--pixel-border) solid rgba(255,255,255,0.03);
@@ -538,14 +498,12 @@
         text-shadow: none;
       }
 
-      /* Tweak header nav when section active (more visible) */
       .navbtn.active {
         color: #0b0b0b;
         background: linear-gradient(90deg, var(--pixel-accent), #ffbf5c);
         box-shadow: 0 8px 20px rgba(0,0,0,0.45);
       }
 
-      /* Responsive: reduce section padding on small screens */
       @media (max-width: 760px) {
         .header {
           left: 12px;
@@ -568,11 +526,8 @@
         .footer .icon-link { padding: 4px; }
       }
 
-      /* -------------------- TYPOGRAPHIE / COMMUN TIMELINE & PROJECT -------------------- */
-      /* Ces règles s'appliquent aux deux composants (timeline & project)
-         pour garder une cohérence visuelle tout en restant modifiables séparément */
-      
-      /* title */
+      /* -------------------- COMMUN A TIMELINE & PROJECT -------------------- */
+
       .timeline-title,
       .project h3 {
         margin: 0;
@@ -582,7 +537,6 @@
         line-height: 1.15;
       }
       
-      /* role / sous-titre */
       .timeline-role,
       .project .muted {
         margin-top: 4px;
@@ -591,7 +545,6 @@
         font-weight: 600;
       }
       
-      /* description / détail */
       .timeline-detail,
       .project p {
         margin-top: 8px;
@@ -601,8 +554,6 @@
         opacity: 0.95;
       }
       
-      /* date / meta (petit texte utilitaire)
-         On unifie l'apparence de .project .meta et .timeline-date ici. */
       .timeline-date,
       .project .meta {
         font-size: var(--meta-size);
@@ -611,8 +562,6 @@
         line-height: 1;
       }
       
-      /* place la timeline-date en bas à droite de la timeline-card
-         (même pattern que .project .meta) */
       .timeline-card .timeline-date {
         position: absolute;
         right: 12px;
@@ -620,7 +569,119 @@
         pointer-events: none;
       }
       
-      /* -------------------- RESPONSIVE (mobile) -------------------- */
+      .timeline.style-pixel::before {
+        content: "";
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        top: 3%;
+        bottom: 3%;
+        width: 10px;
+        background-image:
+          linear-gradient(180deg, rgba(124,92,255,0.98), rgba(124,92,255,0.9));
+        border-radius: 2px;   
+        z-index: 0;
+        box-shadow: none;
+      }
+      
+      .timeline.style-pixel .timeline-connector {
+        width: 68px;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        pointer-events:none;
+      }
+      
+      .timeline.style-pixel .timeline-dot {
+        width: 16px;
+        height: 16px;
+        border-radius: 3px;
+        background: linear-gradient(180deg, var(--pixel-accent), var(--accent));
+        box-shadow: var(--pixel-shadow);
+        border: var(--pixel-border) solid rgba(0,0,0,0.45);
+        transform: none;
+      }
+      
+      .timeline.style-pixel .timeline-item:hover .timeline-dot {
+        transform: translateY(-2px);
+        filter: brightness(1.08);
+        transition: transform 160ms steps(1), filter 160ms linear;
+      }
+
+      .timeline.style-ribbon::before {
+        content: "";
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        top: 2%;
+        bottom: 2%;
+        width: 18px;
+        background: linear-gradient(180deg, rgba(124,92,255,0.95), rgba(95,177,255,0.95));
+        border-radius: 12px;
+        box-shadow: 0 6px 18px rgba(0,0,0,0.45), inset 0 2px 6px rgba(255,255,255,0.03);
+        z-index: 0;
+        border: 1px solid rgba(255,255,255,0.04);
+      }
+
+      .timeline.style-ribbon .timeline-connector {
+        width: 64px;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        pointer-events:none;
+      }
+
+      .timeline.style-ribbon .timeline-dot {
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        background: radial-gradient(circle at 30% 30%, #fff, rgba(255,255,255,0.2) 20%, rgba(124,92,255,1) 60%);
+        box-shadow: 0 4px 12px rgba(95,77,200,0.28), 0 0 0 6px rgba(124,92,255,0.06);
+        border: 2px solid rgba(255,255,255,0.06);
+        z-index: 3;
+        transform: translateY(0);
+      }
+
+      .timeline.style-ribbon .timeline-item:hover .timeline-dot {
+        transform: translateY(-4px) scale(1.06);
+        transition: transform 220ms ease;
+      }
+
+      .timeline.style-dashed::before {
+        content: "";
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        top: 6%;
+        bottom: 6%;
+        width: 4px;
+        background: repeating-linear-gradient(180deg,
+          rgba(255,255,255,0.06) 0 6px,
+          transparent 6px 12px);
+        z-index: 0;
+        border-radius: 2px;
+        box-shadow: none;
+      }
+
+      .timeline.style-dashed .timeline-connector {
+        width: 56px;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        pointer-events:none;
+      }
+
+      .timeline.style-dashed .timeline-dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: transparent;
+        border: 2px solid rgba(124,92,255,0.95);
+        box-shadow: 0 4px 12px rgba(124,92,255,0.12), 0 0 0 6px rgba(124,92,255,0.04);
+        z-index: 3;
+      }
+
+      /* --------------------- RESPONSIVE (mobile) ----------------------- */
       @media (max-width: 760px) {
         .timeline::before { left: 12px; transform: none; width:3px; }
         .timeline {
@@ -630,12 +691,10 @@
         .timeline-item { justify-content: flex-start; }
         .timeline-item-inner { gap: 12px; }
       
-        /* On veut le connector à gauche puis la carte (order) */
         .timeline-connector { order: 0; width: 36px; }
         .timeline-card { order: 1; width: calc(100% - 80px); max-width: 100%; padding-bottom: 16px; }
         .timeline-item .timeline-card { margin: 0 0 0 8px; }
       
-        /* Make timeline-date behave like project meta on mobile: become inline/static */
         .timeline-card .timeline-date {
           position: static;
           display: block;
@@ -645,7 +704,6 @@
           pointer-events: auto;
         }
       
-        /* Projects: adapt width + meta placement */
         .project { width: calc(100% - 80px); max-width: 100%; padding-bottom: 16px; }
         .project .meta { position: static; display: block; margin-top: 8px; text-align: right; white-space: normal; pointer-events: auto; }
 
@@ -666,13 +724,98 @@
           order: 1;
         }
       }
+
+    @media (max-width: 760px) {
+      .container {
+        padding-left: 12px;
+        padding-right: 12px;
+      }
+
+      .grid {
+        grid-template-columns: 1fr !important;
+        gap: 14px;
+        padding: 0;
+        margin-left: 0;
+        margin-right: 0;
+      }
+
+      .project {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0;
+        padding-bottom: 16px;
+        box-sizing: border-box;
+        left: 0; 
+        right: 0;
+      }
+
+      .project .meta {
+        position: static;
+        display: block;
+        margin-top: 8px;
+        text-align: right;
+        pointer-events: auto;
+        white-space: normal;
+      }
+
+      .timeline::before {
+        left: 6px !important;   
+        transform: none !important;
+        width: 3px !important;
+        opacity: 0.9;
+      }
+
+      .timeline .timeline-item,
+      .timeline .timeline-item.left,
+      .timeline .timeline-item.right {
+        justify-content: flex-start !important;
+      }
+
+      .timeline-connector { order: 0 !important; width: 36px; flex: 0 0 36px; }
+      .timeline-card      { order: 1 !important; width: calc(100% - 56px) !important; max-width: none !important; margin: 0 0 0 8px; }
+
+      .timeline-card {
+        padding-bottom: 16px;
+      }
+      .timeline {
+        padding-left: 12px;
+      }
+      .timeline-connector {
+        order: 0 !important;
+        width: 36px;
+        flex: 0 0 36px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-left: 0;
+      }
+      .timeline .timeline-dot {
+        margin-left: -6px; 
+        transform: translateX(0);
+      }
+      .timeline .timeline-item.left .timeline-card,
+      .timeline .timeline-item.right .timeline-card {
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+      }
+
+      .section-block {
+        padding-left: 14px;
+        padding-right: 14px;
+      }
+
+      .section-hero {
+        padding-top: calc(var(--header-height) + env(safe-area-inset-top, 0px) + 12px) !important;
+      }
+
+      #home {
+        scroll-margin-top: calc(var(--header-height) + env(safe-area-inset-top, 0px) + 12px);
+      }
+    }
+
       
-      /* petit tweak pour hero sur petits écrans */
       @media (max-width:800px){.hero{flex-direction:column}.hero .hero-right{width:100%}}
       
-      /* -------------------- Pixel-Neo utilities (opt-in classes) -------------------- */
-      
-      /* pixel-badge: small skill badges, keep markup optional */
       .pixel-badge{
         display:inline-flex;
         align-items:center;
@@ -688,7 +831,6 @@
         width:10px; height:10px; border-radius:2px; background:var(--pixel-accent); box-shadow: 4px 4px 0 rgba(0,0,0,0.45);
       }
       
-      /* tiny bob animation for small decorative elements */
       @keyframes pixel-bob {
         0% { transform: translateY(0); }
         50% { transform: translateY(-3px); }
@@ -696,18 +838,13 @@
       }
       .pixel-bob { animation: pixel-bob 1.2s steps(1) infinite; }
       
-      /* reduced motion respect */
       @media (prefers-reduced-motion: reduce){
         .pixel-bob, .project:hover, .navbtn, .btn { animation: none!important; transition: none!important; }
       }
       
-      /* ---------- small helpers for consistent focus outlines ---------- */
       :focus{ outline: none; }
       button:focus, a:focus {
         outline: 3px solid rgba(124,92,255,0.18);
         outline-offset: 3px;
         border-radius: 6px;
       }
-      
-      /* ---------- end of file (same structure / organisation preserved) ---------- */
-      

@@ -88,7 +88,7 @@ export default function Timeline({ id = 'timeline' }: { id?: string }) {
       </div>
 
       <div className="timeline-wrapper" aria-hidden={false}>
-        <div className="timeline">
+        <div className="timeline style-dashed">
           {ITEMS.map((it, index) => {
             const visualIndex = ITEMS.length - 1 - index
             const side = visualIndex % 2 === 0 ? 'right' : 'left'
