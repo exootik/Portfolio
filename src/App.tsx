@@ -9,6 +9,8 @@ import Home from './pages/Home'
 import Projects from './pages/Projects'
 import Timeline from './pages/Timeline'
 
+import bgImage from './assets/images/imgBg.png'
+
 export default function App() {
   const [page, setPage] = useState<'home' | 'projects' | 'timeline'>('home')
 
@@ -48,6 +50,17 @@ export default function App() {
   useEffect(() => {
     document.title = page === 'home' ? 'Simon - Accueil' : page === 'projects' ? 'Simon - Projets' : 'Simon - Parcours'
   }, [page])
+
+  useEffect(() => {
+    const prev = document.body.style.backgroundImage
+    document.body.style.backgroundImage = `linear-gradient(180deg, rgba(11,12,15,0.65), rgba(15,17,21,0.65)), url(${bgImage})`
+    document.body.style.backgroundSize = 'cover'
+    document.body.style.backgroundPosition = 'center center'
+    document.body.style.backgroundAttachment = 'fixed'
+    return () => {
+      document.body.style.backgroundImage = prev
+    }
+  }, [])
 
   return (
     <div className="container">

@@ -1,3 +1,5 @@
+import photoSimon from '../assets/images/PhotoSimon.jpg';
+
 // src/pages/Home.tsx
 export default function Home({ id = 'home' }: { id?: string }) {
   return (
@@ -14,7 +16,7 @@ export default function Home({ id = 'home' }: { id?: string }) {
         </div>
         <div className="hero-right">
           <div className="profile-card">
-            <img src="/images/imgTest.png" alt="Simon portrait" className="avatar-pixel" style={{width:'100%', borderRadius:12}}/>
+            <img src={photoSimon} alt="Simon portrait" className="avatar-pixel"/>
             <h4 style={{marginTop:12}}>Simon - Game Dev</h4>
             <div style={{marginTop:8, display:'flex', gap:8, flexWrap:'wrap'}}>
               <span className="pixel-badge pixel-font">Unity</span>

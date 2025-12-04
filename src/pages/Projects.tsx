@@ -2,6 +2,9 @@
 import ProjectCard from '../components/ProjectCard'
 
 // Import images et videos
+// Where We Hide
+import whereWeHidePoster from '../assets/images/imgWhereWeHide.jpg';
+import whereWeHideVideo  from '../assets/videos/videoStrangeraria.mp4';
 // Strangeraria
 import strangerariaPoster from '../assets/images/imgStrangeraria.jpg';
 import strangerariaVideo  from '../assets/videos/videoStrangeraria.mp4';
@@ -43,6 +46,18 @@ type Project = {
 }
 
 const PROJECTS: Project[] = [
+  {
+    id: '3C',
+    title: 'Where we hide',
+    role: "Unity • 3C • Navmesh • Animation",
+    desc: "Jeu d'horreur avec un personnage miniature qui résout des énigmes",
+    itchUrl: 'https://billetsimon.itch.io/strangeraria',
+    githubUrl: 'https://github.com/exootik/11-25-WhereWeHide',
+    poster: whereWeHidePoster,
+    videoUrl: whereWeHideVideo,
+    date: 'Novembre 2025',
+    duree: '1 semaine'
+  },
   {
     id: 'genProcedural',
     title: 'Strangeraria',
