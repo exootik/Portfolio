@@ -3,12 +3,12 @@ name: Build and deploy to GitHub Pages
 on:
   push:
     branches:
-      - main    # change si ta branche principale s'appelle 'master' ou autre
+      - main 
 
 permissions:
-  contents: write   # permet de push/pull le contenu (git)
-  pages: write      # permis pour Pages (publish)
-  id-token: write   # parfois nécessaire pour OIDC (ok à laisser)
+  contents: write
+  pages: write
+  id-token: write
   
 jobs:
   build-and-deploy:
@@ -17,10 +17,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Use Node.js 18
+      - name: Use Node.js 20
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: '20'
 
       - name: Install dependencies
         run: npm install
@@ -33,4 +33,4 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist
-          publish_branch: gh-pages    # branche de destination
+          publish_branch: gh-pages

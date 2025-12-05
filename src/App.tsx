@@ -9,7 +9,7 @@ import Home from './pages/Home'
 import Projects from './pages/Projects'
 import Timeline from './pages/Timeline'
 
-import bgImage from './assets/images/imgBg.png'
+import bgImage from './assets/images/ImgBg.png'
 
 export default function App() {
   const [page, setPage] = useState<'home' | 'projects' | 'timeline'>('home')
