@@ -58,13 +58,13 @@ const ITEMS: Item[] = [
   { id: 'stageBiopath', 
     title: 'Stage Biopath',
     role: 'Laravel - php - Git',
-    desc: 'Stage dans une équipe de taille moyenne dans un laboratoire', 
+    desc: "Stage de développement au sein d'une petite équipe dans un laboratoire", 
     date: '2023' 
   },
   { id: 'stageCapgemini', 
     title: 'Stage Capgemini',
     role: "javaScript - Gestion d'équipe - Communication",
-    desc: 'Stage dans une grande entreprise', 
+    desc: "Stage de développement d'application au sein d'une grande équipe", 
     date: '2024' 
   },
   { id: 'stageShopify', 
