@@ -47,6 +47,18 @@ type Project = {
 
 const PROJECTS: Project[] = [
   {
+    id: 'UiUx',
+    title: 'Game Card Mafia',
+    role: "MVC • UI • Scriptable Object • Tour par tour",
+    desc: "Jeu de cartes tour par tour, il faut survivre à des manches successives d'attaques de la mafia en utilisant des cartes pour se défendre",
+    itchUrl: 'https://billetsimon.itch.io/game-card-mafia',
+    githubUrl: 'https://github.com/exootik/12-25-UI-CardGameMafia',
+    poster: undefined,
+    videoUrl: undefined,
+    date: 'Décembre 2025',
+    duree: '1 semaine'
+  },
+  {
     id: '3C',
     title: 'Where we hide',
     role: "Unity • 3C • Navmesh • Animation",
