@@ -2,6 +2,9 @@
 import ProjectCard from '../components/ProjectCard'
 
 // Import images et videos
+// Card Game Mafia
+import cardGameMafiaPoster from '../assets/images/imgCardGameMafia.jpg';
+import cardGameMafiaVideo  from '../assets/videos/videoCardGameMafia.mp4';
 // Where We Hide
 import whereWeHidePoster from '../assets/images/imgWhereWeHide.jpg';
 import whereWeHideVideo  from '../assets/videos/videoWhereWeHide.mp4';
@@ -53,8 +56,8 @@ const PROJECTS: Project[] = [
     desc: "Jeu de cartes tour par tour, il faut survivre à des manches successives d'attaques de la mafia en utilisant des cartes pour se défendre",
     itchUrl: 'https://billetsimon.itch.io/game-card-mafia',
     githubUrl: 'https://github.com/exootik/12-25-UI-CardGameMafia',
-    poster: undefined,
-    videoUrl: undefined,
+    poster: cardGameMafiaPoster,
+    videoUrl: cardGameMafiaVideo,
     date: 'Décembre 2025',
     duree: '1 semaine'
   },
