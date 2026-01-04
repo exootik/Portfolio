@@ -12,9 +12,10 @@ type Props = {
 
   date?: string
   duree?: string
+  personnes?: number
 }
 
-export default function ProjectCard({ title, role, desc, itchUrl, githubUrl, poster, videoUrl, date, duree }: Props){
+export default function ProjectCard({ title, role, desc, itchUrl, githubUrl, poster, videoUrl, date, duree, personnes }: Props){
   const [showVideo, setShowVideo] = useState(false)
 
   const hasVideo = !!videoUrl
@@ -28,7 +29,15 @@ export default function ProjectCard({ title, role, desc, itchUrl, githubUrl, pos
       handleToggle()
     }
   }
-  const meta = [date, duree].filter(Boolean).join(' • ')
+  
+  // Construction des métadonnées avec icône pour les personnes
+  const metaParts = []
+  if (date) metaParts.push(date)
+  if (duree) metaParts.push(duree)
+  if (personnes) {
+    metaParts.push(`Équipe de ${personnes}`)
+  }
+  const meta = metaParts.join(' • ')  
 
   return (
     <article className="project">
@@ -70,7 +79,7 @@ export default function ProjectCard({ title, role, desc, itchUrl, githubUrl, pos
 
         {hasVideo && (
           <button className="btn" onClick={handleToggle} style={{background:'rgba(124,92,255,0.2)'}}>
-            {showVideo ? 'Afficher l’image' : 'Voir la vidéo'}
+            {showVideo ? "Afficher l'image" : "Voir la vidéo"}
           </button>
         )}
 

@@ -46,6 +46,7 @@ type Project = {
   videoUrl?: string | undefined
   date?: string
   duree?: string
+  personnes?: number
 }
 
 const PROJECTS: Project[] = [
@@ -58,8 +59,9 @@ const PROJECTS: Project[] = [
     githubUrl: 'https://github.com/exootik/12-25-UI-CardGameMafia',
     poster: cardGameMafiaPoster,
     videoUrl: cardGameMafiaVideo,
-    date: 'Décembre 2025',
-    duree: '1 semaine'
+    date: '12/2025',
+    duree: '1 semaine',
+    personnes: 2
   },
   {
     id: '3C',
@@ -70,8 +72,9 @@ const PROJECTS: Project[] = [
     githubUrl: 'https://github.com/exootik/11-25-WhereWeHide',
     poster: whereWeHidePoster,
     videoUrl: whereWeHideVideo,
-    date: 'Novembre 2025',
-    duree: '1 semaine'
+    date: '11/2025',
+    duree: '1 semaine',
+    personnes: 2
   },
   {
     id: 'genProcedural',
@@ -82,8 +85,9 @@ const PROJECTS: Project[] = [
     githubUrl: 'https://github.com/exootik/11-25-TerrariaLike',
     poster: strangerariaPoster,
     videoUrl: strangerariaVideo,
-    date: 'Novembre 2025',
-    duree: '1 semaine'
+    date: '11/2025',
+    duree: '1 semaine',
+    personnes: 2
   },
   {
     id: 'zombie-fps',
@@ -94,8 +98,9 @@ const PROJECTS: Project[] = [
     githubUrl: 'https://github.com/exootik/10-24-Fps-ZombieSurvivor',
     poster: zombieFpsPoster,
     videoUrl: zombieFpsVideo,
-    date: 'Octobre 2025',
-    duree: '1 semaine'
+    date: '10/2025',
+    duree: '1 semaine',
+    personnes: 2
   },
   {
     id: 'pokemon-like',
@@ -106,8 +111,9 @@ const PROJECTS: Project[] = [
     githubUrl: 'https://github.com/exootik/09-25-PokeLike',
     poster: pokemonPoster,
     videoUrl: pokemonVideo,
-    date: 'Septembre 2025',
-    duree: '1 semaine'
+    date: '09/2025',
+    duree: '1 semaine',
+    personnes: 3
   },
   {
     id: 'slime',
@@ -118,8 +124,9 @@ const PROJECTS: Project[] = [
     githubUrl: 'https://github.com/exootik/04-25-Slime3D',
     poster: slime3DPoster,
     videoUrl: slime3DVideo,
-    date: 'Avril 2025',
-    duree: '3 semaines'
+    date: '04/2025',
+    duree: '3 semaines',
+    personnes: 3
   },
   {
     id: 'moteur',
@@ -130,8 +137,9 @@ const PROJECTS: Project[] = [
     githubUrl: 'https://github.com/exootik/03-25-Creation-MoteurDeJeu3D',
     poster: moteur3DPoster,
     videoUrl: moteur3DVideo,
-    date: 'Mars 2025',
-    duree: '3 semaines'
+    date: '03/2025',
+    duree: '3 semaines',
+    personnes: 3
   },
   {
     id: 'multijoueur',
@@ -142,8 +150,9 @@ const PROJECTS: Project[] = [
     githubUrl: 'https://github.com/exootik/01-25-Multijoueur-SFML',
     poster: multijoueurPoster,
     videoUrl: undefined,
-    date: 'Janvier 2025',
-    duree: '2 semaines'
+    date: '01/2025',
+    duree: '2 semaines',
+    personnes: 2
   },
   {
     id: 'shooter2D',
@@ -154,8 +163,9 @@ const PROJECTS: Project[] = [
     githubUrl: 'https://github.com/exootik/12-24-Shooter-Game2D',
     poster: shooter2DPoster,
     videoUrl: shooter2DVideo,
-    date: 'Decembre 2024',
-    duree: '3 semaines'
+    date: '12/2024',
+    duree: '3 semaines',
+    personnes: 3
   },
   {
     id: 'rugby-ia',
@@ -166,8 +176,9 @@ const PROJECTS: Project[] = [
     githubUrl: 'https://github.com/exootik/11-24-IA-Rugby2D',
     poster: rugbyIAPoster,
     videoUrl: rugbyIAVideo,
-    date: 'Novembre 2024',
-    duree: '1 semaine'
+    date: '11/2024',
+    duree: '1 semaine',
+    personnes: 2
   },
   {
     id: 'casse-brique',
@@ -178,8 +189,9 @@ const PROJECTS: Project[] = [
     githubUrl: 'https://github.com/exootik/10-24-Break-Brick-SFML',
     poster: casseBriquePoster,
     videoUrl: casseBriqueVideo,
-    date: 'Octobre 2024',
-    duree: '2 semaines'
+    date: '10/2024',
+    duree: '2 semaines',
+    personnes: 2
   }
 ]
 
@@ -207,6 +219,7 @@ export default function Projects({ id = 'projects' }: { id?: string }) {
             videoUrl={p.videoUrl}
             date={p.date}
             duree={p.duree}
+            personnes={p.personnes}
           />
         ))}
       </div>

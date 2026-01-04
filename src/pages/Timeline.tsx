@@ -22,7 +22,7 @@ const ITEMS: Item[] = [
   { id: 'enfance', 
     title: 'Enfance', 
     role: 'Courir - Decouvrir - Jouer', 
-    desc: 'Enfance heureuse à la campagne avec mes frères', 
+    desc: 'Enfance heureuse à la campagne bourguignonne avec mes frères', 
     date: '2003 - 2014' 
   },
   { id: 'college', 
