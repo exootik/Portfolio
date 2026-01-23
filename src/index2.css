@@ -206,6 +206,13 @@ body.pixel-neo .profile-card{
   border: var(--pixel-border) solid rgba(0,0,0,0.5);
   box-shadow: var(--pixel-shadow);
   font-weight:700;
+  transition: transform .12s ease, box-shadow .12s ease, filter .12s ease;
+}
+
+.btn.pixel:hover {
+  transform: translateY(-2px);
+  box-shadow: 8px 8px 0 rgba(0,0,0,0.45);
+  filter: brightness(1.1);
 }
 
 .footer{margin-top:48px;padding-top:18px;border-top:1px solid rgba(255,255,255,0.03)}
@@ -267,7 +274,7 @@ body.pixel-neo .icon-link img {
 .project {
   position: relative;
   padding: 12px;
-  padding-bottom: 56px;
+  padding-bottom: 80px;
   background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
   border: 1px solid rgba(255,255,255,0.04);
   border-radius: 12px;
@@ -292,18 +299,64 @@ body.pixel-neo .icon-link img {
   gap: 8px;
   padding: 8px 10px;
   border-radius: 8px;
-  background: transparent;
+  background: rgba(124,92,255,0.2);
   color: #e6eef8;
-  border: 1px solid rgba(255,255,255,0.06);
+  border: 1px solid rgba(124,92,255,0.3);
   text-decoration: none;
   font-weight: 600;
   font-size: 0.92rem;
-  transition: background .18s ease, transform .12s ease, border-color .12s ease;
+  transition: background .18s ease, transform .12s ease, border-color .12s ease, box-shadow .18s ease;
 }
 
 .btn.github:hover {
-  background: rgba(255,255,255,0.02);
-  transform: translateY(-1px);
+  background: rgba(124,92,255,0.35);
+  border-color: rgba(124,92,255,0.5);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(124,92,255,0.25);
+}
+
+.btn.btn-video {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  background: rgba(0,0,0,0.4);
+  color: #e6eef8;
+  border: 1px solid rgba(255,255,255,0.08);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.92rem;
+  cursor: pointer;
+  transition: background .18s ease, transform .12s ease, border-color .12s ease, box-shadow .18s ease;
+}
+
+.btn.btn-video:hover {
+  background: rgba(0,0,0,0.6);
+  border-color: rgba(255,255,255,0.15);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+}
+
+.project-footer {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  right: 12px;
+}
+
+.project-footer .meta {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  margin: 0;
+}
+
+.project-buttons {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  padding-bottom: 28px;
 }
 
 @media (max-width: 420px) {
@@ -412,9 +465,9 @@ body.pixel-neo .timeline-card{
   width:14px;
   height:14px;
   border-radius:50%;
-  background: linear-gradient(180deg,var(--accent),#5fb1ff);
-  box-shadow: 0 4px 12px rgba(92,80,200,0.25), 0 0 0 6px rgba(124,92,255,0.06);
-  border: 2px solid rgba(255,255,255,0.06);
+  background: linear-gradient(180deg, var(--pixel-accent), #ffbf5c);
+  box-shadow: 0 4px 12px rgba(255,211,77,0.35), 0 0 0 6px rgba(255,211,77,0.12);
+  border: 2px solid rgba(255,211,77,0.15);
   position: relative;
   z-index: 3;
 }
@@ -449,17 +502,24 @@ html { scroll-behavior: smooth; }
 
 .section-title {
   display:flex;
-  align-items:center;
-  gap:12px;
+  flex-direction: column;
+  align-items:flex-start;
+  gap:8px;
   margin-bottom:12px;
 }
 .section-title h1, .section-title h2 {
   margin:0;
-  font-size: clamp(1.6rem, 2.6vw, 2.6rem);
+  font-size: clamp(1.8rem, 3vw, 3rem);
   letter-spacing: -0.02em;
   color: #ffffff;
   text-shadow: 0 6px 20px rgba(0,0,0,0.45);
   font-weight:800;
+}
+.section-title h2.subtitle {
+  font-size: clamp(1.3rem, 2.2vw, 2.2rem);
+  color: #e6eef8;
+  font-weight: 600;
+  opacity: 0.9;
 }
 
 .section-hero {
@@ -676,8 +736,8 @@ body.pixel-neo .section-title h1, body.pixel-neo .section-title h2 {
   height: 12px;
   border-radius: 50%;
   background: transparent;
-  border: 2px solid rgba(124,92,255,0.95);
-  box-shadow: 0 4px 12px rgba(124,92,255,0.12), 0 0 0 6px rgba(124,92,255,0.04);
+  border: 2px solid var(--pixel-accent);
+  box-shadow: 0 4px 12px rgba(255,211,77,0.25), 0 0 0 6px rgba(255,211,77,0.08);
   z-index: 3;
 }
 
@@ -705,7 +765,24 @@ body.pixel-neo .section-title h1, body.pixel-neo .section-title h2 {
   }
 
   .project { width: calc(100% - 80px); max-width: 100%; padding-bottom: 16px; }
-  .project .meta { position: static; display: block; margin-top: 8px; text-align: right; white-space: normal; pointer-events: auto; }
+  
+  .project-footer {
+    position: static;
+    margin-top: 12px;
+  }
+  
+  .project-buttons {
+    padding-bottom: 8px;
+  }
+  
+  .project-footer .meta {
+    position: static;
+    display: block;
+    margin-top: 8px;
+    text-align: right;
+    white-space: normal;
+    pointer-events: auto;
+  }
 
   .footer-inner {
     display: flex;
@@ -819,13 +896,14 @@ body.pixel-neo .section-title h1, body.pixel-neo .section-title h2 {
 .pixel-badge{
   display:inline-flex;
   align-items:center;
-  gap:10px;
-  padding:10px 16px;
-  border-radius:6px;
+  gap:8px;
+  padding:6px 8px;
+  border-radius:4px;
   background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.02));
   border: 1px solid rgba(255,255,255,0.04);
   font-weight:700;
-  font-size:13px;
+  font-size:11px;
+  color: var(--pixel-accent);
 }
 .pixel-badge .dot{
   width:10px; height:10px; border-radius:2px; background:var(--pixel-accent); box-shadow: 4px 4px 0 rgba(0,0,0,0.45);
