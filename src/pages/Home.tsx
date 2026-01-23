@@ -5,14 +5,19 @@ export default function Home({ id = 'home' }: { id?: string }) {
   return (
     <section id={id} className="section-block section-hero" tabIndex={-1}>
       <div className="section-title">
-        <h1>Simon Billet, développeur de jeux</h1>
+        <h1>Simon Billet</h1>
+        <h2 className="subtitle">Développeur de jeux</h2>
       </div>
 
       <div className="hero">
         <div className="hero-left">
-          <p className="muted">Passionné par la création de jeux vidéo, je souhaite contribuer à des projets toujours plus ambitieux.</p>
-          <p>Fort de 4 ans d'expérience en développement dont 2 ans spécifiquement en création de jeux vidéo, j'allie compétences techniques, capacités d'adaptation et de communication pour être efficace en équipe</p>
-          
+          <p className="muted">Développeur jeux vidéo basé à Lyon, je conçois des expériences interactives depuis 2 ans. </p>
+          <p>Mon approche combine rigueur technique (C++, C#, Unity, Unreal) et sens du gameplay, acquis à travers 15+ projets collaboratifs menés en cycles courts.</p>
+          <p>J'ai touché à toutes les étapes : prototypage rapide pour tester des mécaniques, architecture de systèmes gameplay, optimisation, intégration d'assets et déploiement.</p>
+          <p>Mon passage par le développement web (3 stages en startup et ESN) m'a également donné une solide base en méthodologie et travail d'équipe.</p>
+          <p>Je cherche à rejoindre des équipes ambitieuses pour contribuer à des productions toujours plus qualitatives.</p>
+
+          <p></p>
           {/* Compétences déplacées ici pour meilleur équilibre */}
           <div style={{marginTop:20, display:'flex', gap:8, flexWrap:'wrap'}}>
             <span className="pixel-badge pixel-font">Unity</span>
@@ -26,7 +31,7 @@ export default function Home({ id = 'home' }: { id?: string }) {
         <div className="hero-right">
           <div className="profile-card">
             <img src={photoSimon} alt="Simon portrait" className="avatar-pixel"/>
-            <h4 style={{marginTop:12}}>Simon - Game Dev</h4>
+            {/* <h4 style={{marginTop:12}}>Simon - Game Dev</h4> */}
           </div>
         </div>
       </div>

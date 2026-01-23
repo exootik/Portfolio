@@ -70,32 +70,34 @@ export default function ProjectCard({ title, role, desc, itchUrl, githubUrl, pos
       {role && <div className="muted" style={{marginTop:2}}>{role}</div>}
       <p style={{marginTop:8}}>{desc}</p>
 
-      <div style={{display:'flex', gap:8, marginTop:10}}>
-        {itchUrl && (
-          <a className="btn pixel" href={itchUrl} target="_blank" rel="noreferrer">
-            Jouer
-          </a>
-        )}
+      <div className="project-footer">
+        {meta && <div className="muted meta">{meta}</div>}
+        <div className="project-buttons">
+          {itchUrl && (
+            <a className="btn pixel" href={itchUrl} target="_blank" rel="noreferrer">
+              Jouer
+            </a>
+          )}
 
-        {hasVideo && (
-          <button className="btn" onClick={handleToggle} style={{background:'rgba(124,92,255,0.2)'}}>
-            {showVideo ? "Afficher l'image" : "Voir la vidéo"}
-          </button>
-        )}
+          {githubUrl && (
+            <a
+              className="btn github"
+              href={githubUrl}
+              target="_blank"
+              rel="noreferrer"
+              aria-label={`Voir ${title} sur GitHub`}
+            >
+              GitHub
+            </a>
+          )}
 
-        {githubUrl && (
-          <a
-            className="btn github"
-            href={githubUrl}
-            target="_blank"
-            rel="noreferrer"
-            aria-label={`Voir ${title} sur GitHub`}
-          >
-            GitHub
-          </a>
-        )}
+          {hasVideo && (
+            <button className="btn btn-video" onClick={handleToggle}>
+              {showVideo ? "Afficher l'image" : "Voir la vidéo"}
+            </button>
+          )}
+        </div>
       </div>
-      {meta && <div className="muted meta">{meta}</div>}
     </article>
   )
 }
