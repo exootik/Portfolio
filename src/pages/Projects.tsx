@@ -2,6 +2,9 @@
 import ProjectCard from '../components/ProjectCard'
 
 // Import images et videos
+// shaderZelda
+import shaderZeldaPoster from '../assets/images/imgShaderZelda.jpg';
+import shaderZeldaVideo  from '../assets/videos/videoShaderZelda.mp4';
 // Card Game Mafia
 import cardGameMafiaPoster from '../assets/images/imgCardGameMafia.jpg';
 import cardGameMafiaVideo  from '../assets/videos/videoCardGameMafia.mp4';
@@ -51,12 +54,25 @@ type Project = {
 
 const PROJECTS: Project[] = [
   {
+    id: 'Shader',
+    title: 'Shader Zelda Game',
+    role: "Shader • Particle • Feedback",
+    desc: "Jeu Zelda réalisé sur Unity pour apprendre à utiliser les Shaders et les particles. Explorez le monde et combattez des ennemies",
+    itchUrl: 'https://billetsimon.itch.io/zelda-awakening-like',
+    githubUrl: 'https://github.com/exootik/Game-Shader-ZeldaAwakening',
+    poster: shaderZeldaPoster,
+    videoUrl: shaderZeldaVideo,
+    date: '01/2026',
+    duree: '1 semaine',
+    personnes: 2
+  },
+  {
     id: 'UiUx',
     title: 'Game Card Mafia',
     role: "MVC • UI • Scriptable Object • Tour par tour",
     desc: "Jeu de cartes tour par tour, il faut survivre à des manches successives d'attaques de la mafia en utilisant des cartes pour se défendre",
     itchUrl: 'https://billetsimon.itch.io/game-card-mafia',
-    githubUrl: 'https://github.com/exootik/12-25-UI-CardGameMafia',
+    githubUrl: 'https://github.com/exootik/Game-UI-CardGameMafia',
     poster: cardGameMafiaPoster,
     videoUrl: cardGameMafiaVideo,
     date: '12/2025',
@@ -69,7 +85,7 @@ const PROJECTS: Project[] = [
     role: "Unity • 3C • Navmesh • Animation",
     desc: "Jeu d'horreur avec un personnage miniature qui résout des énigmes",
     itchUrl: 'https://billetsimon.itch.io/where-we-hide',
-    githubUrl: 'https://github.com/exootik/11-25-WhereWeHide',
+    githubUrl: 'https://github.com/exootik/Game-Unity3C-WhereWeHide',
     poster: whereWeHidePoster,
     videoUrl: whereWeHideVideo,
     date: '11/2025',
@@ -82,7 +98,7 @@ const PROJECTS: Project[] = [
     role: "Unity • Génération procédural • Création d'inventaire",
     desc: "Jeu d'exploration, de construction, de combat similaire à Terraria",
     itchUrl: 'https://billetsimon.itch.io/strangeraria',
-    githubUrl: 'https://github.com/exootik/11-25-TerrariaLike',
+    githubUrl: 'https://github.com/exootik/Game-UnityGenProcedurale-TerrariaLike',
     poster: strangerariaPoster,
     videoUrl: strangerariaVideo,
     date: '11/2025',
@@ -95,7 +111,7 @@ const PROJECTS: Project[] = [
     role: 'Unity • Navmesh • Animation',
     desc: "FPS créé sur Unity : système de vagues, plusieurs armes, IA avec un navmesh",
     itchUrl: 'https://billetsimon.itch.io/zombiefps',
-    githubUrl: 'https://github.com/exootik/10-24-Fps-ZombieSurvivor',
+    githubUrl: 'https://github.com/exootik/Game-UnityFps-ZombieSurvivor',
     poster: zombieFpsPoster,
     videoUrl: zombieFpsVideo,
     date: '10/2025',
@@ -108,7 +124,7 @@ const PROJECTS: Project[] = [
     role: 'C# • Programmation • Sauvegarde',
     desc: "Jeu en console créé pour apprendre le C#",
     itchUrl: undefined,
-    githubUrl: 'https://github.com/exootik/09-25-PokeLike',
+    githubUrl: 'https://github.com/exootik/Game-POO-PokeLikeConsole',
     poster: pokemonPoster,
     videoUrl: pokemonVideo,
     date: '09/2025',
@@ -121,7 +137,7 @@ const PROJECTS: Project[] = [
     role: 'C++ • DirectX12 • Dev Gameplay',
     desc: "Jeu d'aventure basé sur notre propre moteur de jeu 3D",
     itchUrl: undefined,
-    githubUrl: 'https://github.com/exootik/04-25-Slime3D',
+    githubUrl: 'https://github.com/exootik/Game-DirectX12-Slime3D',
     poster: slime3DPoster,
     videoUrl: slime3DVideo,
     date: '04/2025',
@@ -134,7 +150,7 @@ const PROJECTS: Project[] = [
     role: 'C++ • DirectX12 • Dev Moteur',
     desc: "Création d'un moteur de jeu 3D avec DirectX12",
     itchUrl: undefined,
-    githubUrl: 'https://github.com/exootik/03-25-Creation-MoteurDeJeu3D',
+    githubUrl: 'https://github.com/exootik/Game-DirectX12-CreationMoteurDeJeu3D',
     poster: moteur3DPoster,
     videoUrl: moteur3DVideo,
     date: '03/2025',
@@ -147,7 +163,7 @@ const PROJECTS: Project[] = [
     role: 'C++ • Principe du multijoueur • SFML',
     desc: "Création d'un serveur UDP puis connexion de deux joueurs avec SFML",
     itchUrl: undefined,
-    githubUrl: 'https://github.com/exootik/01-25-Multijoueur-SFML',
+    githubUrl: 'https://github.com/exootik/Game-SFML-Multijoueur2D',
     poster: multijoueurPoster,
     videoUrl: undefined,
     date: '01/2025',
@@ -160,7 +176,7 @@ const PROJECTS: Project[] = [
     role: 'C++ • Interdisciplinaire • SFML',
     desc: "Jeu de tir réalisé pour le musée automobile Henri Malartre en colaboration avec les artistes de 2eme années",
     itchUrl: undefined,
-    githubUrl: 'https://github.com/exootik/12-24-Shooter-Game2D',
+    githubUrl: 'https://github.com/exootik/Game-SFML-Shooter2D',
     poster: shooter2DPoster,
     videoUrl: shooter2DVideo,
     date: '12/2024',
@@ -173,7 +189,7 @@ const PROJECTS: Project[] = [
     role: 'C++ • IA • State machine',
     desc: "Jeu de rugby joué par deux IA",
     itchUrl: undefined,
-    githubUrl: 'https://github.com/exootik/11-24-IA-Rugby2D',
+    githubUrl: 'https://github.com/exootik/Game-IA-Rugby2D',
     poster: rugbyIAPoster,
     videoUrl: rugbyIAVideo,
     date: '11/2024',
@@ -186,7 +202,7 @@ const PROJECTS: Project[] = [
     role: 'C++ • Encapsulation • SFML',
     desc: "Premier projet de jeu au Gaming Campus pour apprendre les bases du C++",
     itchUrl: undefined,
-    githubUrl: 'https://github.com/exootik/10-24-Break-Brick-SFML',
+    githubUrl: 'https://github.com/exootik/Game-SFML-BreakBrick2D',
     poster: casseBriquePoster,
     videoUrl: casseBriqueVideo,
     date: '10/2024',
