@@ -55,8 +55,8 @@ type Project = {
 const PROJECTS: Project[] = [
   {
     id: 'Shader',
-    title: 'Shader Zelda Game',
-    role: "Shader • Particle • Feedback",
+    title: 'Zelda Game',
+    role: "Unity • Shader • Particle • Feedback",
     desc: "Jeu Zelda réalisé sur Unity pour apprendre à utiliser les Shaders et les particles. Explorez le monde et combattez des ennemies",
     itchUrl: 'https://billetsimon.itch.io/zelda-awakening-like',
     githubUrl: 'https://github.com/exootik/Game-Shader-ZeldaAwakening',
@@ -69,7 +69,7 @@ const PROJECTS: Project[] = [
   {
     id: 'UiUx',
     title: 'Game Card Mafia',
-    role: "MVC • UI • Scriptable Object • Tour par tour",
+    role: "Unity • MVC • UI • Scriptable Object • Tour par tour",
     desc: "Jeu de cartes tour par tour, il faut survivre à des manches successives d'attaques de la mafia en utilisant des cartes pour se défendre",
     itchUrl: 'https://billetsimon.itch.io/game-card-mafia',
     githubUrl: 'https://github.com/exootik/Game-UI-CardGameMafia',
