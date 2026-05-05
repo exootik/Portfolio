@@ -4,7 +4,7 @@ import ProjectCard from '../components/ProjectCard'
 // Import images et videos
 // framed
 import framedPoster from '../assets/images/imgFramed.png';
-import framedVideo  from '../assets/videos/videoAngryBirdLike.mp4';
+//import framedVideo  from '../assets/videos/videoAngryBirdLike.mp4';
 // angryBirdLike
 import angryBirdLikePoster from '../assets/images/imgAngryBirdLike.jpg';
 import angryBirdLikeVideo  from '../assets/videos/videoAngryBirdLike.mp4';
@@ -67,11 +67,11 @@ const PROJECTS: Project[] = [
     id: 'Framed',
     title: 'Framed',
     role: "Unreal Engine • Lead Tech • Architecture • Animation",
-    desc: "Jeu de fin d'études réalisé sur Unreal Engine en collaboration avec des artistes, business et TV. Incarnez un gardien de musée et immergez vous à l'intérieur des tableaux maudits pour lever leur malédiction",
+    desc: "En cours de déploiement : Jeu de fin d'études réalisé sur Unreal Engine en collaboration avec des artistes, business et TV. Incarnez un gardien de musée et immergez vous à l'intérieur des tableaux maudits pour lever leur malédiction",
     itchUrl: '',
     githubUrl: '',
     poster: framedPoster,
-    videoUrl: framedVideo,
+    videoUrl: "",
     date: '04/2026',
     duree: '8 semaines',
     personnes: 15
