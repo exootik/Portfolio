@@ -2,6 +2,7 @@
 const LINKEDIN_URL = 'https://www.linkedin.com/in/simon-billet'
 const ITCH_URL = 'https://billetsimon.itch.io'
 const MAILTO = 'mailto:simonbillet4@gmail.com'
+const GITHUB_URL = 'https://github.com/exootik'
 
 // Icons
 import iconGmailBleu from '../assets/icons/gmailBleu.png';
@@ -14,10 +15,10 @@ export default function Footer(){
     <footer className="footer">
       <div className="footer-inner container">
         <div className="footer-links">
-        <a href={LINKEDIN_URL} target="_blank" rel="noreferrer" aria-label="LinkedIn" className="icon-link">
+        <a href={MAILTO} target="_blank" rel="noreferrer" aria-label="LinkedIn" className="icon-link">
             <img
               src={iconGmailBleu}
-              alt="LinkedIn - Simon Billet"
+              alt="Envoyer un email - Simon Billet"
               width="20"
               height="20"
               loading="lazy"
@@ -32,10 +33,10 @@ export default function Footer(){
               loading="lazy"
             />          
           </a>
-          <a href={MAILTO} className="icon-link" aria-label="Email">
+          <a href={GITHUB_URL} target="_blank" rel="noreferrer" className="icon-link" aria-label="GitHub">
             <img
               src={iconGithubBleu}
-              alt="Envoyer un email - Simon Billet"
+              alt="GitHub - Simon Billet"
               width="20"
               height="20"
               loading="lazy"

@@ -2,6 +2,18 @@
 import ProjectCard from '../components/ProjectCard'
 
 // Import images et videos
+// framed
+import framedPoster from '../assets/images/imgFramed.png';
+//import framedVideo  from '../assets/videos/trailerFramed.mp4';
+import framedVideo  from '../assets/videos/videoAngryBirdLike.mp4';
+
+// angryBirdLike
+import angryBirdLikePoster from '../assets/images/imgAngryBirdLike.jpg';
+import angryBirdLikeVideo  from '../assets/videos/videoAngryBirdLike.mp4';
+// shaderZelda
+//import pharaonEnigmaPoster from '../assets/images/imgShaderZelda.jpg';
+//import pharaonEnigmaVideo  from '../assets/videos/videoShaderZelda.mp4';
+
 // shaderZelda
 import shaderZeldaPoster from '../assets/images/imgShaderZelda.jpg';
 import shaderZeldaVideo  from '../assets/videos/videoShaderZelda.mp4';
@@ -53,6 +65,45 @@ type Project = {
 }
 
 const PROJECTS: Project[] = [
+  {
+    id: 'Framed',
+    title: 'Framed',
+    role: "Unreal Engine • Lead Tech • Architecture • Animation",
+    desc: "Jeu de fin d'études réalisé sur Unreal Engine en collaboration avec des artistes, business et TV. Incarnez un gardien de musée et immergez vous à l'intérieur des tableaux maudits pour lever leur malédiction",
+    itchUrl: '',
+    githubUrl: '',
+    poster: framedPoster,
+    videoUrl: framedVideo,
+    date: '04/2026',
+    duree: '8 semaines',
+    personnes: 15
+  },
+  {
+    id: 'AngryBirdLike',
+    title: 'Angry Bird Like',
+    role: "Unreal Engine • Physiques • fracture",
+    desc: "Jeu angry bird réalisé pour apprendre la physique avancée et les systemes de fracture d'Unreal Engine",
+    itchUrl: '',
+    githubUrl: 'https://github.com/exootik/Game-UE-AngryBirdLike',
+    poster: angryBirdLikePoster,
+    videoUrl: angryBirdLikeVideo,
+    date: '03/2026',
+    duree: '1 semaine',
+    personnes: 2
+  },
+  // {
+  //   id: 'PharaonEnigma',
+  //   title: 'Pharaon Enigma',
+  //   role: "Unreal Engine • Puzzles • Blueprints",
+  //   desc: "Jeu de puzzle avec des énigmes pour découvrir le fonctionnement du moteur Unreal Engine",
+  //   itchUrl: '',
+  //   githubUrl: 'https://github.com/exootik/Game-UE-PharaonEnigma',
+  //   poster: pharaonEnigmaPoster,
+  //   videoUrl: pharaonEnigmaVideo,
+  //   date: '02/2026',
+  //   duree: '2 semaines',
+  //   personnes: 2
+  // },
   {
     id: 'Shader',
     title: 'Zelda Game',
