@@ -4,7 +4,9 @@ import ProjectCard from '../components/ProjectCard'
 // Import images et videos
 // shaderZelda
 import framedPoster from '../assets/images/imgFramed.png';
-import framedVideo  from '../assets/videos/trailerFramed.mp4';
+//import framedVideo  from '../assets/videos/trailerFramed.mp4';
+import framedVideo  from '../assets/videos/videoAngryBirdLike.mp4';
+
 // angryBirdLike
 import angryBirdLikePoster from '../assets/images/imgAngryBirdLike.jpg';
 import angryBirdLikeVideo  from '../assets/videos/videoAngryBirdLike.mp4';
