@@ -571,7 +571,7 @@
       const respondents = entries.length;
       const labels = bestDays.map(s=> `${s.d.getDate()} ${MONTHS[s.d.getMonth()]}`).join(', ');
       const bestOne = bestDays[0];
-      bestLine.innerHTML = `Meilleure option : <b>${labels}</b> — ${bestOne.libreCount} libre${bestOne.libreCount>1?'s':''}${bestOne.peutCount ? ` et ${bestOne.peutCount} peut-être` : ''} sur ${respondents} réponse${respondents>1?'s':''}.`;
+      bestLine.innerHTML = `Meilleure option : <b>${labels}</b> - ${bestOne.libreCount} libre${bestOne.libreCount>1?'s':''}${bestOne.peutCount ? ` et ${bestOne.peutCount} peut-être` : ''} sur ${respondents} réponse${respondents>1?'s':''}.`;
     } else {
       bestLine.textContent = "Personne n'est encore marqué disponible sur ce créneau.";
     }
