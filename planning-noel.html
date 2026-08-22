@@ -186,6 +186,45 @@
   .refresh-link{ background:none; border:none; color:var(--forest); font-size:12px; font-weight:600; cursor:pointer; text-decoration:underline; padding:0;}
   .you-tag{ font-size:10px; background:var(--pine); color:var(--paper); padding:1px 6px; border-radius:5px; margin-left:6px; font-weight:600; vertical-align:middle;}
   footer.note{ text-align:center; font-size:11.5px; color:var(--muted); padding: 18px 24px 0; line-height:1.6;}
+
+  /* editing banner */
+  .editing-banner{
+    background: rgba(201,162,39,0.15);
+    border: 1px solid var(--gold);
+    color: var(--pine-dark);
+    font-size: 13px;
+    padding: 10px 14px;
+    border-radius: 8px;
+    margin-bottom: 14px;
+    line-height: 1.5;
+  }
+  .link-btn{
+    background:none; border:none; color:var(--forest); font-weight:600; font-size:13px;
+    text-decoration:underline; cursor:pointer; padding:0; margin-left:2px; font-family:'Inter',sans-serif;
+  }
+  .link-btn:focus-visible{ outline:2px solid var(--pine); outline-offset:2px; }
+  .table-status{ font-size:12px; color:var(--muted); font-family:'IBM Plex Mono', monospace;}
+
+  /* per-row actions in overview */
+  .row-name{ display:flex; align-items:center; gap:6px; flex-wrap:wrap; font-weight:600; }
+  .row-actions{ display:flex; gap:6px; margin-top:6px; }
+  .icon-btn{
+    background: var(--cream); border:1px solid var(--unset-border); border-radius:7px;
+    width:32px; height:32px; min-width:32px; display:flex; align-items:center; justify-content:center;
+    cursor:pointer; font-size:14px; padding:0; line-height:1;
+    transition: background .12s ease, transform .08s ease, border-color .12s ease;
+  }
+  .icon-btn:hover{ background: var(--line); }
+  .icon-btn:active{ transform: scale(0.93); }
+  .icon-btn:focus-visible{ outline:2px solid var(--pine); outline-offset:1px;}
+  .icon-btn.delete-btn:hover{ background: rgba(181,73,91,0.15); border-color: var(--occupe); }
+  .icon-btn.edit-btn:hover{ background: rgba(45,106,79,0.15); border-color: var(--forest); }
+
+  @media (max-width: 480px){
+    table.overview th.pname{ min-width: 108px; }
+    table.overview td.pname{ min-width: 108px; }
+    .mini{ width:20px; height:20px; }
+  }
 </style>
 </head>
 <body>
@@ -210,8 +249,11 @@
 
     <section id="main-view" style="display:none;">
 
+      <div id="editing-banner" class="editing-banner" style="display:none;">
+        Tu modifies les réponses de <b id="editing-name"></b>. <button class="link-btn" id="back-to-me-btn">Revenir aux tiennes</button>
+      </div>
       <div class="card" id="mine-card">
-        <div class="section-title"><span class="num">2</span> Tes disponibilités <span id="me-tag" class="you-tag"></span></div>
+        <div class="section-title"><span class="num">2</span> Disponibilités <span id="me-tag" class="you-tag"></span></div>
         <div class="section-desc">Clique sur un jour pour changer ton statut : Libre → Peut-être → Occupé → (vide). Le créneau couvre les fêtes et les jours qui suivent.</div>
         <div class="legend">
           <span><span class="dot" style="background:var(--libre)"></span> Libre</span>
@@ -230,7 +272,7 @@
       <section>
         <div class="card">
           <div class="section-title"><span class="num">3</span> Vue d'ensemble</div>
-          <div class="section-desc">Ce que chacun a répondu jusqu'ici. <button class="refresh-link" id="refresh-btn">Rafraîchir</button></div>
+          <div class="section-desc">Ce que chacun a répondu jusqu'ici — ✏️ pour corriger une réponse, 🗑️ pour la supprimer. <button class="refresh-link" id="refresh-btn">Rafraîchir</button> <span id="overview-status" class="table-status"></span></div>
           <div id="overview-empty" class="empty">Personne n'a encore répondu — sois le·la premier·ère !</div>
           <div class="overview-scroll">
             <table class="overview" id="overview-table" style="display:none;">
@@ -290,6 +332,8 @@
   let myKey = '';
   let myAvail = {};
   let myNote = '';
+  let joinedName = '';
+  let joinedKey = '';
   let allData = {}; // { key: {name, avail:{iso:state}, note} }
 
   const joinView = document.getElementById('join-view');
@@ -308,6 +352,10 @@
   const overviewBody = document.getElementById('overview-body');
   const consensusBar = document.getElementById('consensus-bar');
   const bestLine = document.getElementById('best-line');
+  const editingBanner = document.getElementById('editing-banner');
+  const editingNameEl = document.getElementById('editing-name');
+  const backToMeBtn = document.getElementById('back-to-me-btn');
+  const overviewStatus = document.getElementById('overview-status');
 
   function loadMyName(){
     try{
@@ -339,13 +387,82 @@
       const res = await fetch(SHEET_API_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-        body: JSON.stringify(allData)
+        body: JSON.stringify({ action: 'save', data: allData })
       });
       await res.json();
       return true;
     }catch(e){
       return false;
     }
+  }
+
+  async function deleteEntry(key){
+    if(overviewStatus) overviewStatus.textContent = 'Suppression...';
+    await fetchAllData();
+    const entry = allData[key];
+    if(!entry){
+      if(overviewStatus) overviewStatus.textContent = '';
+      return;
+    }
+    delete allData[key];
+    const deletedEntry = {
+      name: entry.name,
+      avail: entry.avail || {},
+      note: entry.note || '',
+      deletedAt: new Date().toISOString(),
+      deletedBy: joinedName || myName || ''
+    };
+    let ok = true;
+    try{
+      const res = await fetch(SHEET_API_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify({ action: 'delete', data: allData, deletedEntry })
+      });
+      await res.json();
+    }catch(e){
+      ok = false;
+    }
+    if(overviewStatus) overviewStatus.textContent = ok ? 'Supprimé ✓' : 'Erreur — réessaie';
+    // if the deleted entry was the one currently being edited, reset the editor
+    if(myKey === key){
+      if(joinedKey && joinedKey !== key){
+        loadPersonIntoEditor(joinedKey, true);
+      } else {
+        myAvail = {};
+        myNote = '';
+        myNoteEl.value = '';
+        renderMyGrid();
+        editingBanner.style.display = 'none';
+      }
+    }
+    renderOverview();
+    renderConsensus();
+    setTimeout(()=>{ if(overviewStatus && overviewStatus.textContent.indexOf('Supprimé') === 0) overviewStatus.textContent = ''; }, 3000);
+  }
+
+  function loadPersonIntoEditor(key, isBackToSelf){
+    const entry = allData[key];
+    if(!entry && !isBackToSelf) return;
+    myName = entry ? entry.name : joinedName;
+    myKey = key;
+    myAvail = entry ? Object.assign({}, entry.avail || {}) : {};
+    myNote = entry ? (entry.note || '') : '';
+    meTag.textContent = myName;
+    myNoteEl.value = myNote;
+    renderMyGrid();
+    if(key !== joinedKey && !isBackToSelf){
+      editingNameEl.textContent = myName;
+      editingBanner.style.display = 'block';
+    } else {
+      editingBanner.style.display = 'none';
+    }
+    mineCardScrollIntoView();
+  }
+
+  function mineCardScrollIntoView(){
+    const card = document.getElementById('mine-card');
+    if(card && card.scrollIntoView) card.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
   function renderMyGrid(){
@@ -371,7 +488,7 @@
   }
 
   function renderOverview(){
-    const entries = Object.values(allData);
+    const entries = Object.keys(allData).map(k => Object.assign({ _key: k }, allData[k]));
     if(entries.length === 0){
       overviewEmpty.style.display = 'block';
       overviewTable.style.display = 'none';
@@ -388,8 +505,14 @@
     entries.sort((a,b)=> a.name.localeCompare(b.name, 'fr'));
     entries.forEach(entry=>{
       const tr = document.createElement('tr');
-      const isMe = entry.name === myName;
-      let rowHtml = `<td class="pname">${escapeHtml(entry.name)}${isMe ? ' <span class="you-tag">toi</span>' : ''}</td>`;
+      const isJoined = entry._key === joinedKey;
+      let rowHtml = `<td class="pname">
+        <div class="row-name">${escapeHtml(entry.name)}${isJoined ? ' <span class="you-tag">toi</span>' : ''}</div>
+        <div class="row-actions">
+          <button class="icon-btn edit-btn" data-key="${entry._key}" aria-label="Modifier les réponses de ${escapeHtml(entry.name)}" title="Modifier">✏️</button>
+          <button class="icon-btn delete-btn" data-key="${entry._key}" aria-label="Supprimer les réponses de ${escapeHtml(entry.name)}" title="Supprimer">🗑️</button>
+        </div>
+      </td>`;
       DAYS.forEach(d=>{
         const k = iso(d);
         const st = (entry.avail && entry.avail[k]) || '';
@@ -463,6 +586,8 @@
   async function enterMain(name){
     myName = name.trim();
     myKey = keyFor(myName);
+    joinedName = myName;
+    joinedKey = myKey;
     meTag.textContent = myName;
     await fetchAllData();
     if(allData[myKey]){
@@ -496,6 +621,27 @@
   });
 
   refreshBtn.addEventListener('click', refreshAll);
+
+  overviewBody.addEventListener('click', async (e)=>{
+    const editBtnEl = e.target.closest('.edit-btn');
+    const delBtnEl = e.target.closest('.delete-btn');
+    if(editBtnEl){
+      loadPersonIntoEditor(editBtnEl.getAttribute('data-key'));
+    } else if(delBtnEl){
+      const key = delBtnEl.getAttribute('data-key');
+      const entry = allData[key];
+      if(!entry) return;
+      const sure = window.confirm(`Supprimer les réponses de ${entry.name} ?\n\nElles seront retirées du planning (un historique reste consultable dans le Google Sheet, onglet dataSupp).`);
+      if(!sure) return;
+      await deleteEntry(key);
+    }
+  });
+
+  backToMeBtn.addEventListener('click', ()=>{
+    if(joinedKey){
+      loadPersonIntoEditor(joinedKey, true);
+    }
+  });
 
   (async function init(){
     const saved = await loadMyName();
