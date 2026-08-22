@@ -40,7 +40,7 @@
               "RelativeDocumentMoniker": "public\\planning-noel.html",
               "ToolTip": "C:\\a_code\\perso\\portfolio\\Portfolio\\public\\planning-noel.html",
               "RelativeToolTip": "public\\planning-noel.html",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAUAAAAAAAAAA==",
+              "ViewState": "AgIAANsAAAAAAAAAAAAmwOwAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
               "WhenOpened": "2026-08-22T11:52:16.32Z",
               "EditorCaption": ""
@@ -55,8 +55,7 @@
               "RelativeToolTip": "src\\main.tsx",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
-              "WhenOpened": "2026-08-22T11:47:37.896Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-08-22T11:47:37.896Z"
             },
             {
               "$type": "Document",
@@ -68,8 +67,7 @@
               "RelativeToolTip": "src\\pages\\Home.tsx",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABwAAAAQAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
-              "WhenOpened": "2026-08-22T11:47:13.561Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-08-22T11:47:13.561Z"
             },
             {
               "$type": "Document",
@@ -81,8 +79,7 @@
               "RelativeToolTip": "src\\pages\\Projects.tsx",
               "ViewState": "AgIAAAoBAAAAAAAAAAAUwBoBAAAdAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
-              "WhenOpened": "2026-08-22T11:47:10.349Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-08-22T11:47:10.349Z"
             },
             {
               "$type": "Document",
@@ -94,8 +91,7 @@
               "RelativeToolTip": "src\\App.tsx",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
-              "WhenOpened": "2026-08-22T11:46:47.752Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-08-22T11:46:47.752Z"
             }
           ]
         }
