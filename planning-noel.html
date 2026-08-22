@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Noël en famille — Planning</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream: #F6F1E4;
+    --paper: #FBF8F0;
+    --pine: #1B4332;
+    --pine-dark: #123027;
+    --forest: #2D6A4F;
+    --gold: #C9A227;
+    --cinnamon: #8B5E3C;
+    --ink: #2B2620;
+    --muted: #7A7264;
+    --line: #E3DAC3;
+    --libre: #2D6A4F;
+    --peutetre: #C9A227;
+    --occupe: #B5495B;
+    --unset-bg: #FBF8F0;
+    --unset-border: #D8CDAF;
+    --radius: 10px;
+    --shadow: 0 1px 2px rgba(43,38,32,0.06), 0 4px 16px rgba(43,38,32,0.06);
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap{
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 0 0 48px 0;
+  }
+  header.band{
+    background: linear-gradient(160deg, var(--pine) 0%, var(--pine-dark) 100%);
+    color: var(--paper);
+    padding: 28px 24px 22px;
+    border-bottom: 3px solid var(--gold);
+    position: relative;
+  }
+  .eyebrow{
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 6px;
+  }
+  h1{
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 28px;
+    margin: 0 0 6px 0;
+    letter-spacing: -0.01em;
+  }
+  .sub{
+    font-size: 14px;
+    color: #D8E4DA;
+    max-width: 46ch;
+    line-height: 1.5;
+  }
+  main{ padding: 22px 20px 0; }
+  section{ margin-bottom: 30px; }
+  .card{
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 18px;
+  }
+  .section-title{
+    font-family: 'Fraunces', serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--pine-dark);
+    margin: 0 0 4px 0;
+    display:flex; align-items:center; gap:8px;
+  }
+  .section-title .num{
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    background: var(--pine);
+    color: var(--paper);
+    width: 18px; height:18px;
+    border-radius: 5px;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .section-desc{ font-size: 13px; color: var(--muted); margin: 2px 0 14px 0; line-height:1.5;}
+
+  /* JOIN */
+  #join-view label{ font-size:13px; font-weight:600; color: var(--pine-dark); display:block; margin-bottom:6px;}
+  #join-view input{
+    width:100%; padding:11px 12px; border-radius:8px; border:1px solid var(--unset-border);
+    font-family:'Inter',sans-serif; font-size:15px; background: var(--cream); color: var(--ink);
+  }
+  #join-view input:focus{ outline:2px solid var(--forest); outline-offset:1px;}
+  button.primary{
+    margin-top:12px;
+    background: var(--pine); color: var(--paper); border:none;
+    padding: 11px 18px; border-radius: 8px; font-family:'Inter',sans-serif; font-weight:600; font-size:14px;
+    cursor:pointer; transition: background .15s ease;
+  }
+  button.primary:hover{ background: var(--pine-dark); }
+  button.primary:focus-visible{ outline:2px solid var(--gold); outline-offset:2px; }
+
+  /* legend */
+  .legend{ display:flex; gap:14px; flex-wrap:wrap; margin-bottom:14px; font-size:12px; color:var(--muted);}
+  .legend span{ display:inline-flex; align-items:center; gap:5px;}
+  .dot{ width:10px; height:10px; border-radius:3px; display:inline-block;}
+
+  /* day grid for "me" */
+  .day-grid{
+    display:grid;
+    grid-template-columns: repeat(auto-fill, minmax(58px, 1fr));
+    gap:6px;
+  }
+  .day-cell{
+    border:1.5px solid var(--unset-border);
+    background: var(--unset-bg);
+    border-radius: 8px;
+    padding: 6px 4px 7px;
+    text-align:center;
+    cursor:pointer;
+    user-select:none;
+    transition: transform .08s ease, box-shadow .12s ease;
+  }
+  .day-cell:hover{ transform: translateY(-1px); box-shadow: 0 2px 6px rgba(43,38,32,0.10);}
+  .day-cell:focus-visible{ outline:2px solid var(--pine); outline-offset:1px;}
+  .day-cell .wd{ font-family:'IBM Plex Mono', monospace; font-size:9px; text-transform:uppercase; color:var(--muted); letter-spacing:.04em;}
+  .day-cell .dn{ font-family:'Fraunces', serif; font-size:16px; font-weight:600; color:var(--ink); line-height:1.3;}
+  .day-cell .st{ font-size:9px; font-weight:600; margin-top:2px; }
+  .day-cell.libre{ background: rgba(45,106,79,0.12); border-color: var(--libre); }
+  .day-cell.libre .st{ color: var(--libre); }
+  .day-cell.peutetre{ background: rgba(201,162,39,0.15); border-color: var(--peutetre); }
+  .day-cell.peutetre .st{ color: #96780f; }
+  .day-cell.occupe{ background: rgba(181,73,91,0.12); border-color: var(--occupe); }
+  .day-cell.occupe .st{ color: var(--occupe); }
+  .day-cell.today{ box-shadow: inset 0 0 0 1px var(--gold); }
+
+  textarea{
+    width:100%; margin-top:12px; padding:10px 12px; border-radius:8px; border:1px solid var(--unset-border);
+    font-family:'Inter', sans-serif; font-size:13px; resize:vertical; min-height:56px; background:var(--cream); color:var(--ink);
+  }
+  .save-row{ display:flex; align-items:center; gap:10px; margin-top:12px; flex-wrap:wrap;}
+  .save-status{ font-size:12px; color: var(--muted); font-family:'IBM Plex Mono', monospace;}
+
+  /* overview table */
+  .overview-scroll{ overflow-x:auto; padding-bottom:4px; }
+  table.overview{ border-collapse:collapse; width:100%; min-width:640px; }
+  table.overview th, table.overview td{ padding:6px 5px; text-align:center; }
+  table.overview th.pname{ text-align:left; font-family:'Inter',sans-serif; font-weight:600; font-size:12.5px; color:var(--pine-dark); position:sticky; left:0; background:var(--paper); padding-right:10px; }
+  table.overview th.dh{ font-family:'IBM Plex Mono', monospace; font-size:9.5px; color:var(--muted); font-weight:500; white-space:nowrap;}
+  table.overview th.dh .wd{ display:block; text-transform:uppercase; }
+  table.overview td.cell{ padding:4px; }
+  .mini{ width:22px; height:22px; border-radius:6px; margin: 0 auto; }
+  .mini.libre{ background: var(--libre); }
+  .mini.peutetre{ background: var(--peutetre); }
+  .mini.occupe{ background: var(--occupe); }
+  .mini.unset{ background: transparent; border: 1.5px dashed var(--unset-border); }
+  .row-note{ font-size:11.5px; color:var(--muted); text-align:left; padding-top:2px; font-style:italic;}
+
+  /* consensus */
+  .consensus-bar{ display:flex; gap:4px; align-items:flex-end; height:110px; margin-top:6px; }
+  .consensus-col{ flex:1; display:flex; flex-direction:column; align-items:center; justify-content:flex-end; height:100%; position:relative;}
+  .consensus-fill{ width:100%; border-radius: 5px 5px 0 0; background: var(--forest); min-height:2px; transition: height .3s ease;}
+  .consensus-col.best .consensus-fill{ background: var(--gold); }
+  .consensus-label{ font-family:'IBM Plex Mono', monospace; font-size:8.5px; color:var(--muted); margin-top:5px; text-align:center; line-height:1.3;}
+  .best-badge{ position:absolute; top:-16px; font-size:12px; }
+  .best-line{
+    margin-top:16px; padding:12px 14px; background: rgba(201,162,39,0.12); border:1px solid var(--gold);
+    border-radius:8px; font-size:13.5px; color: var(--pine-dark); line-height:1.5;
+  }
+  .best-line b{ color: var(--cinnamon); }
+
+  .empty{ font-size:13px; color:var(--muted); font-style:italic; padding: 10px 0;}
+  .refresh-link{ background:none; border:none; color:var(--forest); font-size:12px; font-weight:600; cursor:pointer; text-decoration:underline; padding:0;}
+  .you-tag{ font-size:10px; background:var(--pine); color:var(--paper); padding:1px 6px; border-radius:5px; margin-left:6px; font-weight:600; vertical-align:middle;}
+  footer.note{ text-align:center; font-size:11.5px; color:var(--muted); padding: 18px 24px 0; line-height:1.6;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="band">
+    <div class="eyebrow">Planning familial</div>
+    <h1>Noël en famille — quand, où ?</h1>
+    <div class="sub">Un seul endroit pour croiser les disponibilités de tout le monde et trouver la date qui marche pour le plus de monde possible.</div>
+  </header>
+
+  <main>
+
+    <section id="join-view">
+      <div class="card">
+        <div class="section-title"><span class="num">1</span> Qui es-tu ?</div>
+        <div class="section-desc">Entre ton prénom pour renseigner tes disponibilités. Les autres membres de la famille verront tes réponses — et toi les leurs.</div>
+        <label for="name-input">Ton prénom</label>
+        <input id="name-input" type="text" placeholder="ex : Tata Josiane, Tonton Marc, Léa..." maxlength="40">
+        <button class="primary" id="join-btn">Continuer</button>
+      </div>
+    </section>
+
+    <section id="main-view" style="display:none;">
+
+      <div class="card" id="mine-card">
+        <div class="section-title"><span class="num">2</span> Tes disponibilités <span id="me-tag" class="you-tag"></span></div>
+        <div class="section-desc">Clique sur un jour pour changer ton statut : Libre → Peut-être → Occupé → (vide). Le créneau couvre les fêtes et les jours qui suivent.</div>
+        <div class="legend">
+          <span><span class="dot" style="background:var(--libre)"></span> Libre</span>
+          <span><span class="dot" style="background:var(--peutetre)"></span> Peut-être</span>
+          <span><span class="dot" style="background:var(--occupe)"></span> Déjà pris</span>
+          <span><span class="dot" style="border:1.5px dashed var(--unset-border)"></span> Pas encore répondu</span>
+        </div>
+        <div class="day-grid" id="my-grid"></div>
+        <textarea id="my-note" placeholder="Précisions utiles (ex : « je suis chez la famille de mon mari le 25, dispo à partir du 27 seulement le soir »)"></textarea>
+        <div class="save-row">
+          <button class="primary" id="save-btn">Enregistrer mes réponses</button>
+          <span class="save-status" id="save-status"></span>
+        </div>
+      </div>
+
+      <section>
+        <div class="card">
+          <div class="section-title"><span class="num">3</span> Vue d'ensemble</div>
+          <div class="section-desc">Ce que chacun a répondu jusqu'ici. <button class="refresh-link" id="refresh-btn">Rafraîchir</button></div>
+          <div id="overview-empty" class="empty">Personne n'a encore répondu — sois le·la premier·ère !</div>
+          <div class="overview-scroll">
+            <table class="overview" id="overview-table" style="display:none;">
+              <thead><tr id="overview-head"></tr></thead>
+              <tbody id="overview-body"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="card">
+          <div class="section-title"><span class="num">4</span> Meilleure date</div>
+          <div class="section-desc">Nombre de personnes libres (ou peut-être) chaque jour. La barre dorée marque le ou les meilleurs jours.</div>
+          <div class="consensus-bar" id="consensus-bar"></div>
+          <div class="best-line" id="best-line"></div>
+        </div>
+      </section>
+
+    </section>
+
+  </main>
+
+  <footer class="note">Les réponses sont partagées entre tous les membres de la famille qui ouvrent ce planning.</footer>
+</div>
+
+<script>
+(function(){
+  const START = new Date(2026, 11, 18); // 18 décembre 2026
+  const NUM_DAYS = 19; // jusqu'au 5 janvier 2027 inclus
+  const WEEKDAYS = ['dim','lun','mar','mer','jeu','ven','sam'];
+  const MONTHS = ['jan','fév','mar','avr','mai','juin','juil','août','sep','oct','nov','déc'];
+  const SHEET_API_URL = 'https://script.google.com/macros/s/AKfycbwUhHLb9b7L9huE2-vVoeR6UdTCvgPpPlSRwEQmrV4cGcy3oJCHYSt2luqfeq8eQuc/exec';
+  const STATES = ['', 'libre', 'peutetre', 'occupe'];
+  const STATE_LABELS = {'':'', 'libre':'Libre', 'peutetre':'Peut-être', 'occupe':'Pris'};
+
+  function dayList(){
+    const days = [];
+    for(let i=0;i<NUM_DAYS;i++){
+      const d = new Date(START);
+      d.setDate(d.getDate()+i);
+      days.push(d);
+    }
+    return days;
+  }
+  const DAYS = dayList();
+  function iso(d){ return d.toISOString().slice(0,10); }
+  function isToday(d){
+    const t = new Date();
+    return d.getFullYear()===t.getFullYear() && d.getMonth()===t.getMonth() && d.getDate()===t.getDate();
+  }
+  function keyFor(name){
+    return name.trim().toLowerCase().replace(/\s+/g,'_').replace(/[^a-z0-9_àâäéèêëïîôöùûüÿçñ-]/gi,'');
+  }
+
+  let myName = '';
+  let myKey = '';
+  let myAvail = {};
+  let myNote = '';
+  let allData = {}; // { key: {name, avail:{iso:state}, note} }
+
+  const joinView = document.getElementById('join-view');
+  const mainView = document.getElementById('main-view');
+  const nameInput = document.getElementById('name-input');
+  const joinBtn = document.getElementById('join-btn');
+  const meTag = document.getElementById('me-tag');
+  const myGrid = document.getElementById('my-grid');
+  const myNoteEl = document.getElementById('my-note');
+  const saveBtn = document.getElementById('save-btn');
+  const saveStatus = document.getElementById('save-status');
+  const refreshBtn = document.getElementById('refresh-btn');
+  const overviewEmpty = document.getElementById('overview-empty');
+  const overviewTable = document.getElementById('overview-table');
+  const overviewHead = document.getElementById('overview-head');
+  const overviewBody = document.getElementById('overview-body');
+  const consensusBar = document.getElementById('consensus-bar');
+  const bestLine = document.getElementById('best-line');
+
+  function loadMyName(){
+    try{
+      const v = localStorage.getItem('planning-noel-my-name');
+      if(v) return v;
+    }catch(e){}
+    return '';
+  }
+  function saveMyName(name){
+    try{ localStorage.setItem('planning-noel-my-name', name); }catch(e){}
+  }
+
+  async function fetchAllData(){
+    try{
+      const res = await fetch(SHEET_API_URL, { method: 'GET' });
+      const json = await res.json();
+      allData = (json && typeof json === 'object') ? json : {};
+    }catch(e){
+      allData = {};
+    }
+  }
+
+  async function pushMyData(){
+    // re-fetch fresh to avoid clobbering concurrent edits, then merge just my entry
+    await fetchAllData();
+    allData[myKey] = { name: myName, avail: myAvail, note: myNote, updated: Date.now() };
+    try{
+      // text/plain avoids a CORS preflight request that Apps Script doesn't handle
+      const res = await fetch(SHEET_API_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify(allData)
+      });
+      await res.json();
+      return true;
+    }catch(e){
+      return false;
+    }
+  }
+
+  function renderMyGrid(){
+    myGrid.innerHTML = '';
+    DAYS.forEach(d=>{
+      const k = iso(d);
+      const state = myAvail[k] || '';
+      const cell = document.createElement('div');
+      cell.className = 'day-cell' + (state ? ' '+state : '') + (isToday(d) ? ' today' : '');
+      cell.tabIndex = 0;
+      cell.innerHTML = `<div class="wd">${WEEKDAYS[d.getDay()]}</div><div class="dn">${d.getDate()}</div><div class="st">${STATE_LABELS[state]||'\u00A0'}</div>`;
+      cell.setAttribute('aria-label', `${d.getDate()} ${MONTHS[d.getMonth()]} — ${STATE_LABELS[state]||'pas encore répondu'}`);
+      function cycle(){
+        const idx = STATES.indexOf(myAvail[k] || '');
+        const next = STATES[(idx+1)%STATES.length];
+        if(next) myAvail[k] = next; else delete myAvail[k];
+        renderMyGrid();
+      }
+      cell.addEventListener('click', cycle);
+      cell.addEventListener('keydown', (e)=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); cycle(); }});
+      myGrid.appendChild(cell);
+    });
+  }
+
+  function renderOverview(){
+    const entries = Object.values(allData);
+    if(entries.length === 0){
+      overviewEmpty.style.display = 'block';
+      overviewTable.style.display = 'none';
+      return;
+    }
+    overviewEmpty.style.display = 'none';
+    overviewTable.style.display = '';
+
+    overviewHead.innerHTML = '<th class="pname">Prénom</th>' + DAYS.map(d=>{
+      return `<th class="dh"><span class="wd">${WEEKDAYS[d.getDay()]}</span>${d.getDate()}</th>`;
+    }).join('');
+
+    overviewBody.innerHTML = '';
+    entries.sort((a,b)=> a.name.localeCompare(b.name, 'fr'));
+    entries.forEach(entry=>{
+      const tr = document.createElement('tr');
+      const isMe = entry.name === myName;
+      let rowHtml = `<td class="pname">${escapeHtml(entry.name)}${isMe ? ' <span class="you-tag">toi</span>' : ''}</td>`;
+      DAYS.forEach(d=>{
+        const k = iso(d);
+        const st = (entry.avail && entry.avail[k]) || '';
+        const cls = st || 'unset';
+        rowHtml += `<td class="cell"><div class="mini ${cls}" title="${STATE_LABELS[st]||'Pas de réponse'}"></div></td>`;
+      });
+      tr.innerHTML = rowHtml;
+      overviewBody.appendChild(tr);
+      if(entry.note && entry.note.trim()){
+        const noteTr = document.createElement('tr');
+        const td = document.createElement('td');
+        td.className = 'row-note';
+        td.colSpan = DAYS.length + 1;
+        td.textContent = '💬 ' + entry.note.trim();
+        noteTr.appendChild(td);
+        overviewBody.appendChild(noteTr);
+      }
+    });
+  }
+
+  function escapeHtml(s){
+    const div = document.createElement('div');
+    div.textContent = s;
+    return div.innerHTML;
+  }
+
+  function renderConsensus(){
+    const entries = Object.values(allData);
+    consensusBar.innerHTML = '';
+    if(entries.length === 0){
+      bestLine.textContent = "Dès que quelqu'un aura répondu, la meilleure date apparaîtra ici.";
+      return;
+    }
+    const scores = DAYS.map(d=>{
+      const k = iso(d);
+      let score = 0, libreCount = 0, peutCount = 0, occCount = 0;
+      entries.forEach(e=>{
+        const st = e.avail && e.avail[k];
+        if(st === 'libre'){ score += 1; libreCount++; }
+        else if(st === 'peutetre'){ score += 0.5; peutCount++; }
+        else if(st === 'occupe'){ occCount++; }
+      });
+      return { d, k, score, libreCount, peutCount, occCount };
+    });
+    const maxScore = Math.max(...scores.map(s=>s.score));
+    const maxHeight = 92;
+    scores.forEach(s=>{
+      const col = document.createElement('div');
+      col.className = 'consensus-col' + (maxScore > 0 && s.score === maxScore ? ' best' : '');
+      const h = maxScore > 0 ? Math.max(4, (s.score/maxScore)*maxHeight) : 4;
+      col.innerHTML = `${maxScore>0 && s.score===maxScore ? '<span class="best-badge">★</span>' : ''}<div class="consensus-fill" style="height:${h}px"></div><div class="consensus-label">${WEEKDAYS[s.d.getDay()]}<br>${s.d.getDate()}</div>`;
+      consensusBar.appendChild(col);
+    });
+    if(maxScore > 0){
+      const bestDays = scores.filter(s=>s.score===maxScore);
+      const respondents = entries.length;
+      const labels = bestDays.map(s=> `${s.d.getDate()} ${MONTHS[s.d.getMonth()]}`).join(', ');
+      const bestOne = bestDays[0];
+      bestLine.innerHTML = `Meilleure option : <b>${labels}</b> — ${bestOne.libreCount} libre${bestOne.libreCount>1?'s':''}${bestOne.peutCount ? ` et ${bestOne.peutCount} peut-être` : ''} sur ${respondents} réponse${respondents>1?'s':''}.`;
+    } else {
+      bestLine.textContent = "Personne n'est encore marqué disponible sur ce créneau.";
+    }
+  }
+
+  async function refreshAll(){
+    await fetchAllData();
+    renderOverview();
+    renderConsensus();
+  }
+
+  async function enterMain(name){
+    myName = name.trim();
+    myKey = keyFor(myName);
+    meTag.textContent = myName;
+    await fetchAllData();
+    if(allData[myKey]){
+      myAvail = allData[myKey].avail || {};
+      myNote = allData[myKey].note || '';
+    }
+    myNoteEl.value = myNote;
+    renderMyGrid();
+    renderOverview();
+    renderConsensus();
+    joinView.style.display = 'none';
+    mainView.style.display = 'block';
+  }
+
+  joinBtn.addEventListener('click', async ()=>{
+    const name = nameInput.value.trim();
+    if(!name){ nameInput.focus(); return; }
+    await saveMyName(name);
+    await enterMain(name);
+  });
+  nameInput.addEventListener('keydown', (e)=>{ if(e.key==='Enter') joinBtn.click(); });
+
+  saveBtn.addEventListener('click', async ()=>{
+    myNote = myNoteEl.value;
+    saveStatus.textContent = 'Enregistrement...';
+    const ok = await pushMyData();
+    saveStatus.textContent = ok ? 'Enregistré ✓' : "Erreur — réessaie";
+    renderOverview();
+    renderConsensus();
+    setTimeout(()=>{ if(saveStatus.textContent.indexOf('Enregistré') === 0) saveStatus.textContent=''; }, 3000);
+  });
+
+  refreshBtn.addEventListener('click', refreshAll);
+
+  (async function init(){
+    const saved = await loadMyName();
+    if(saved){
+      nameInput.value = saved;
+    }
+  })();
+})();
+</script>
+</body>
+</html>
