@@ -231,8 +231,8 @@
 <div class="wrap">
   <header class="band">
     <div class="eyebrow">Planning familial</div>
-    <h1>Noël en famille — quand, où ?</h1>
-    <div class="sub">Un seul endroit pour croiser les disponibilités de tout le monde et trouver la date qui marche pour le plus de monde possible.</div>
+    <h1>Noël en famille organisation </h1>
+    <div class="sub">Questionnaire pour qu'on puisse voir les disponibilités de tout le monde et trouver la date qui nous correspond tous</div>
   </header>
 
   <main>
@@ -240,9 +240,9 @@
     <section id="join-view">
       <div class="card">
         <div class="section-title"><span class="num">1</span> Qui es-tu ?</div>
-        <div class="section-desc">Entre ton prénom pour renseigner tes disponibilités. Les autres membres de la famille verront tes réponses — et toi les leurs.</div>
+        <div class="section-desc">Entre ton prénom pour renseigner tes disponibilités. Les autres membres de la famille verront tes réponses,   et toi les leurs.</div>
         <label for="name-input">Ton prénom</label>
-        <input id="name-input" type="text" placeholder="ex : Tata Josiane, Tonton Marc, Léa..." maxlength="40">
+        <input id="name-input" type="text" placeholder="ex : Manu, Guillaume, Anne-Charlotte & Seb, joelle etc..." maxlength="40">
         <button class="primary" id="join-btn">Continuer</button>
       </div>
     </section>
@@ -254,7 +254,7 @@
       </div>
       <div class="card" id="mine-card">
         <div class="section-title"><span class="num">2</span> Disponibilités <span id="me-tag" class="you-tag"></span></div>
-        <div class="section-desc">Clique sur un jour pour changer ton statut : Libre → Peut-être → Occupé → (vide). Le créneau couvre les fêtes et les jours qui suivent.</div>
+        <div class="section-desc">Clique sur un jour pour changer ton statut : Libre → Peut-être → Occupé → (vide). Précise ensuite un maximum d'info utiles en dessous.</div>
         <div class="legend">
           <span><span class="dot" style="background:var(--libre)"></span> Libre</span>
           <span><span class="dot" style="background:var(--peutetre)"></span> Peut-être</span>
@@ -262,7 +262,7 @@
           <span><span class="dot" style="border:1.5px dashed var(--unset-border)"></span> Pas encore répondu</span>
         </div>
         <div class="day-grid" id="my-grid"></div>
-        <textarea id="my-note" placeholder="Précisions utiles (ex : « je suis chez la famille de mon mari le 25, dispo à partir du 27 seulement le soir »)"></textarea>
+        <textarea id="my-note" placeholder="Précisions utiles (ex : « je suis chez la famille de mon mari le 25, on est dispo en partant de Grenoble le 27 après-midi »)"></textarea>
         <div class="save-row">
           <button class="primary" id="save-btn">Enregistrer mes réponses</button>
           <span class="save-status" id="save-status"></span>
@@ -272,8 +272,8 @@
       <section>
         <div class="card">
           <div class="section-title"><span class="num">3</span> Vue d'ensemble</div>
-          <div class="section-desc">Ce que chacun a répondu jusqu'ici — ✏️ pour corriger une réponse, 🗑️ pour la supprimer. <button class="refresh-link" id="refresh-btn">Rafraîchir</button> <span id="overview-status" class="table-status"></span></div>
-          <div id="overview-empty" class="empty">Personne n'a encore répondu — sois le·la premier·ère !</div>
+          <div class="section-desc">Ce que chacun a répondu jusqu'ici - ✏️ pour modifier une réponse, 🗑️ pour la supprimer. <button class="refresh-link" id="refresh-btn">Rafraîchir</button> <span id="overview-status" class="table-status"></span></div>
+          <div id="overview-empty" class="empty">Personne n'a encore répondu - sois le·la premier·ère !</div>
           <div class="overview-scroll">
             <table class="overview" id="overview-table" style="display:none;">
               <thead><tr id="overview-head"></tr></thead>
