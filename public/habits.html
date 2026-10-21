@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Habitudes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F4F1EA;
+    --card:#FFFFFF;
+    --ink:#1E2230;
+    --muted:#6C7080;
+    --line:#E6E1D4;
+    --accent:#3B4CCA;
+    --accent-soft:rgba(59,76,202,.10);
+    --done:#2E9E6B;
+    --done-soft:rgba(46,158,107,.14);
+    --danger:#C2415B;
+    --radius:14px;
+    --shadow:0 1px 2px rgba(30,34,48,.05),0 4px 14px rgba(30,34,48,.06);
+  }
+  *{box-sizing:border-box;}
+  [hidden]{display:none !important;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .app{
+    max-width:640px; margin:0 auto; min-height:100vh;
+    padding:0 16px calc(88px + env(safe-area-inset-bottom, 0px));
+  }
+  h1,h2,h3{font-family:'Bricolage Grotesque','Inter',sans-serif; margin:0;}
+
+  /* header */
+  .top{
+    display:flex; align-items:center; justify-content:space-between; gap:10px;
+    padding:calc(18px + env(safe-area-inset-top, 0px)) 0 14px;
+  }
+  .brand{font-family:'Bricolage Grotesque',sans-serif; font-weight:700; font-size:22px; letter-spacing:-.01em;}
+  .brand span{color:var(--accent);}
+  .who{display:flex; align-items:center; gap:8px; font-size:13px; color:var(--muted); min-width:0;}
+  .who b{color:var(--ink); max-width:110px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
+  .status{font-size:11.5px; color:var(--muted); min-height:16px; text-align:right; padding-bottom:6px;}
+  .status.err{color:var(--danger); font-weight:600; cursor:pointer;}
+
+  /* generic */
+  .card{
+    background:var(--card); border:1px solid var(--line); border-radius:var(--radius);
+    box-shadow:var(--shadow); padding:18px; margin-bottom:14px;
+  }
+  .page-title{font-size:24px; font-weight:700; margin:6px 0 4px; letter-spacing:-.01em;}
+  .page-sub{font-size:14px; color:var(--muted); margin:0 0 16px; line-height:1.5;}
+  .muted{color:var(--muted);}
+  label{display:block; font-size:13px; font-weight:600; margin-bottom:6px;}
+  input[type=text], select{
+    width:100%; font:inherit; font-size:16px; color:var(--ink);
+    padding:12px 13px; border:1.5px solid var(--line); border-radius:10px; background:#FBFAF6;
+    min-height:46px;
+  }
+  input[type=text]:focus, select:focus{outline:2px solid var(--accent); outline-offset:1px; border-color:transparent;}
+  .btn{
+    font:inherit; font-size:15px; font-weight:600; border:none; border-radius:10px;
+    padding:0 18px; min-height:46px; cursor:pointer;
+    background:var(--accent); color:#fff; transition:transform .08s ease, opacity .15s ease;
+  }
+  .btn:active{transform:scale(.98);}
+  .btn:disabled{opacity:.5; cursor:not-allowed;}
+  .btn.ghost{background:transparent; color:var(--ink); border:1.5px solid var(--line);}
+  .btn.small{min-height:34px; font-size:13px; padding:0 12px; border-radius:8px;}
+  .btn:focus-visible, .icon-btn:focus-visible, .chip:focus-visible, .day:focus-visible, .tab:focus-visible{
+    outline:2px solid var(--accent); outline-offset:2px;
+  }
+  .row{display:flex; gap:10px;}
+  .row > *{min-width:0;}
+  .stack > * + *{margin-top:12px;}
+  .msg{font-size:13px; margin-top:10px; line-height:1.5;}
+  .msg.err{color:var(--danger);}
+  .empty{font-size:14px; color:var(--muted); text-align:center; padding:22px 8px; line-height:1.6;}
+
+  /* login */
+  .chips{display:flex; flex-wrap:wrap; gap:8px; margin-top:10px;}
+  .chip{
+    font:inherit; font-size:14px; font-weight:600; color:var(--ink);
+    background:var(--bg); border:1.5px solid var(--line); border-radius:999px;
+    padding:8px 15px; min-height:40px; cursor:pointer;
+  }
+  .chip:hover{border-color:var(--accent); background:var(--accent-soft);}
+
+  /* week nav + summary */
+  .weeknav{display:flex; align-items:center; justify-content:space-between; margin-bottom:12px;}
+  .weeknav .label{font-weight:600; font-size:15px;}
+  .icon-btn{
+    width:40px; height:40px; border-radius:10px; border:1.5px solid var(--line);
+    background:var(--card); font-size:18px; cursor:pointer; line-height:1; color:var(--ink);
+  }
+  .icon-btn:disabled{opacity:.35; cursor:not-allowed;}
+  .summary{display:flex; align-items:center; gap:16px;}
+  .big{font-family:'Bricolage Grotesque',sans-serif; font-size:38px; font-weight:700; line-height:1; color:var(--accent);}
+  .summary .grow{flex:1; min-width:0;}
+  .bar{height:8px; background:var(--line); border-radius:99px; overflow:hidden;}
+  .bar i{display:block; height:100%; background:var(--accent); border-radius:99px; transition:width .25s ease;}
+  .bar.full i{background:var(--done);}
+
+  /* habit card */
+  .habit-head{display:flex; align-items:baseline; justify-content:space-between; gap:10px; margin-bottom:8px;}
+  .habit-head h3{font-size:17px; font-weight:600; word-break:break-word;}
+  .count{font-size:13px; font-weight:600; color:var(--muted); white-space:nowrap;}
+  .count.ok{color:var(--done);}
+  .days{display:grid; grid-template-columns:repeat(7,1fr); gap:6px; margin-top:12px;}
+  .day{
+    font:inherit; display:flex; flex-direction:column; align-items:center; justify-content:center;
+    min-height:50px; border-radius:12px; border:1.5px solid var(--line); background:#FBFAF6;
+    color:var(--ink); cursor:pointer; padding:4px 0; transition:transform .08s ease;
+  }
+  .day:active{transform:scale(.94);}
+  .day small{font-size:10px; font-weight:600; text-transform:uppercase; color:var(--muted); line-height:1.2;}
+  .day span{font-size:15px; font-weight:600; line-height:1.3;}
+  .day.today{box-shadow:0 0 0 2px var(--accent);}
+  .day.done{background:var(--done); border-color:var(--done); color:#fff;}
+  .day.done small{color:rgba(255,255,255,.85);}
+  .day:disabled{opacity:.35; cursor:default;}
+  .streak{font-size:12.5px; color:var(--muted); margin-top:10px;}
+
+  /* manage */
+  .item{display:flex; align-items:center; justify-content:space-between; gap:10px; padding:12px 0; border-top:1px solid var(--line);}
+  .item:first-child{border-top:none;}
+  .item .t{font-weight:600; font-size:15px; word-break:break-word;}
+  .item .s{font-size:12.5px; color:var(--muted); margin-top:2px;}
+  .item .acts{display:flex; gap:6px; flex-shrink:0;}
+  .edit-box{width:100%;}
+  .edit-box .row{margin-top:10px;}
+
+  /* everyone */
+  .user-head{display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:10px;}
+  .user-head h3{font-size:18px;}
+  .pct{font-family:'Bricolage Grotesque',sans-serif; font-weight:700; font-size:20px; color:var(--accent);}
+  .pct.full{color:var(--done);}
+  .me-tag{font-size:10.5px; font-weight:600; background:var(--accent); color:#fff; padding:2px 7px; border-radius:6px; margin-left:6px; vertical-align:middle;}
+  .mini-habit{padding:10px 0; border-top:1px solid var(--line);}
+  .mini-habit .line{display:flex; justify-content:space-between; gap:8px; font-size:14px; margin-bottom:7px;}
+  .mini-habit .line b{font-weight:600; word-break:break-word;}
+  .dots{display:grid; grid-template-columns:repeat(7,1fr); gap:4px; margin-top:8px;}
+  .dot{height:10px; border-radius:4px; background:var(--line);}
+  .dot.on{background:var(--done);}
+  .dot.future{opacity:.4;}
+
+  /* tab bar */
+  .tabbar{
+    position:fixed; left:0; right:0; bottom:0; z-index:20;
+    background:var(--card); border-top:1px solid var(--line);
+    padding:8px 12px calc(8px + env(safe-area-inset-bottom, 0px));
+  }
+  .tabbar .in{max-width:640px; margin:0 auto; display:grid; grid-template-columns:repeat(3,1fr); gap:6px;}
+  .tab{
+    font:inherit; font-size:12px; font-weight:600; color:var(--muted); background:none; border:none;
+    border-radius:10px; padding:7px 4px; min-height:50px; cursor:pointer;
+    display:flex; flex-direction:column; align-items:center; gap:2px;
+  }
+  .tab .ic{font-size:18px; line-height:1.1;}
+  .tab.active{color:var(--accent); background:var(--accent-soft);}
+</style>
+</head>
+<body>
+<div class="app">
+
+  <header class="top">
+    <div class="brand">Habi<span>tudes</span></div>
+    <div class="who" id="who" hidden>
+      <span>👤 <b id="who-name"></b></span>
+      <button class="btn ghost small" id="logout-btn" type="button">Changer</button>
+    </div>
+  </header>
+  <div class="status" id="status" role="status"></div>
+
+  <main>
+
+    <!-- CONNEXION -->
+    <section id="view-login">
+      <h1 class="page-title">Bienvenue 👋</h1>
+      <p class="page-sub">Entre ton pseudo pour retrouver (ou créer) ta liste d'habitudes.</p>
+      <div class="card">
+        <label for="pseudo">Ton pseudo</label>
+        <div class="row">
+          <input type="text" id="pseudo" placeholder="ex : Simon" maxlength="30" autocomplete="off" autocapitalize="words">
+          <button class="btn" id="login-btn" type="button" disabled>Entrer</button>
+        </div>
+        <div class="msg" id="login-msg"></div>
+        <div id="known" hidden>
+          <label style="margin-top:18px;">Déjà inscrit ? Clique sur ton pseudo</label>
+          <div class="chips" id="known-list"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MES HABITUDES -->
+    <section id="view-mine" hidden>
+      <div class="weeknav">
+        <button class="icon-btn" id="prev-week" type="button" aria-label="Semaine précédente">‹</button>
+        <div class="label" id="week-label"></div>
+        <button class="icon-btn" id="next-week" type="button" aria-label="Semaine suivante">›</button>
+      </div>
+      <div class="card summary" id="summary" hidden></div>
+      <div id="mine-list"></div>
+    </section>
+
+    <!-- GERER -->
+    <section id="view-manage" hidden>
+      <h2 class="page-title">Mes objectifs</h2>
+      <p class="page-sub">Ajoute, modifie ou supprime tes habitudes.</p>
+      <div class="card">
+        <label for="new-title">Nouvelle habitude</label>
+        <div class="stack">
+          <input type="text" id="new-title" placeholder="ex : Faire 20 min de sport" maxlength="60" autocomplete="off">
+          <div class="row">
+            <select id="new-freq" aria-label="Fréquence"></select>
+            <button class="btn" id="add-btn" type="button">Ajouter</button>
+          </div>
+        </div>
+      </div>
+      <div class="card" id="manage-list"></div>
+    </section>
+
+    <!-- TOUS -->
+    <section id="view-all" hidden>
+      <div class="user-head">
+        <h2 class="page-title" style="margin:6px 0 0;">Tout le monde</h2>
+        <button class="btn ghost small" id="refresh-btn" type="button">Rafraîchir</button>
+      </div>
+      <p class="page-sub">Avancement de chacun cette semaine.</p>
+      <div id="all-list"></div>
+    </section>
+
+  </main>
+
+  <nav class="tabbar" id="tabbar" hidden>
+    <div class="in">
+      <button class="tab active" data-tab="mine" type="button"><span class="ic">✅</span>Mes habitudes</button>
+      <button class="tab" data-tab="manage" type="button"><span class="ic">✏️</span>Objectifs</button>
+      <button class="tab" data-tab="all" type="button"><span class="ic">👥</span>Tous</button>
+    </div>
+  </nav>
+</div>
+
+<script>
+(function(){
+  'use strict';
+
+  // ⚠️ Colle ici l'URL de déploiement de ton script Apps Script (celle qui finit par /exec)
+  const API_URL = 'https://script.google.com/macros/s/AKfycbxsgG3Y5ciWPsDxQB6Bd0_9LrUPGioG192Pz0D8P3YGy1rQiX5nreaO8tMvwdE7pFI5/exec';
+
+  const LS_KEY = 'habits-last-pseudo';
+  const DAY_LETTERS = ['L','M','M','J','V','S','D'];
+  const MONTHS = ['janv.','févr.','mars','avr.','mai','juin','juil.','août','sept.','oct.','nov.','déc.'];
+
+  const $ = id => document.getElementById(id);
+
+  let data = { users: {} };
+  let me = null;
+  let tab = 'mine';
+  let weekOffset = 0;
+  let editingId = null;
+
+  let saveTimer = null, saving = false, dirty = false, failed = false;
+
+  /* ---------- helpers ---------- */
+  function esc(s){
+    return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  }
+  function keyFor(name){
+    const k = name.trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'')
+      .replace(/[^a-z0-9]+/g,'_').replace(/^_+|_+$/g,'');
+    return k || 'user';
+  }
+  function uid(){ return 'h' + Date.now().toString(36) + Math.random().toString(36).slice(2,6); }
+  function pad(n){ return String(n).padStart(2,'0'); }
+  function isoDate(d){ return d.getFullYear() + '-' + pad(d.getMonth()+1) + '-' + pad(d.getDate()); }
+  function mondayOf(d){
+    const x = new Date(d.getFullYear(), d.getMonth(), d.getDate());
+    x.setDate(x.getDate() - ((x.getDay() + 6) % 7));
+    return x;
+  }
+  function weekDays(offset){
+    const m = mondayOf(new Date());
+    m.setDate(m.getDate() + offset * 7);
+    return Array.from({length:7}, (_, i) => { const d = new Date(m); d.setDate(m.getDate() + i); return d; });
+  }
+  function weekLabel(offset){
+    if(offset === 0) return 'Cette semaine';
+    if(offset === -1) return 'Semaine dernière';
+    const d = weekDays(offset)[0];
+    return 'Semaine du ' + d.getDate() + ' ' + MONTHS[d.getMonth()];
+  }
+  function freqLabel(n){ return n >= 7 ? 'Tous les jours' : n + (n === 1 ? ' fois / semaine' : ' fois / semaine'); }
+  function freqOptions(sel){
+    let h = '';
+    for(let n = 1; n <= 7; n++) h += '<option value="' + n + '"' + (n === sel ? ' selected' : '') + '>' + freqLabel(n) + '</option>';
+    return h;
+  }
+  function sane(u){
+    u = u || {};
+    return {
+      name: u.name || '',
+      habits: Array.isArray(u.habits) ? u.habits.map(h => ({ id: h.id, title: String(h.title || ''), perWeek: Math.min(7, Math.max(1, parseInt(h.perWeek, 10) || 7)) })) : [],
+      checks: (u.checks && typeof u.checks === 'object') ? u.checks : {},
+      updated: u.updated || 0
+    };
+  }
+  function myUser(){ return data.users[me.key]; }
+
+  function weekStats(u, days){
+    const keys = days.map(isoDate);
+    let done = 0, target = 0;
+    const per = {};
+    u.habits.forEach(h => {
+      const set = new Set(u.checks[h.id] || []);
+      const count = keys.filter(k => set.has(k)).length;
+      per[h.id] = { count, flags: keys.map(k => set.has(k)) };
+      done += Math.min(count, h.perWeek);
+      target += h.perWeek;
+    });
+    return { done, target, pct: target ? Math.round(done / target * 100) : 0, per };
+  }
+  function streak(dates){
+    const set = new Set(dates || []);
+    const d = new Date();
+    if(!set.has(isoDate(d))) d.setDate(d.getDate() - 1);
+    let s = 0;
+    while(set.has(isoDate(d))){ s++; d.setDate(d.getDate() - 1); }
+    return s;
+  }
+
+  /* ---------- API ---------- */
+  function apiReady(){ return API_URL.indexOf('script.google.com') > -1; }
+  async function apiGet(){
+    const r = await fetch(API_URL);
+    const j = await r.json();
+    return j.users || {};
+  }
+  async function apiSaveUser(key, user){
+    const r = await fetch(API_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify({ action: 'saveUser', key: key, user: user })
+    });
+    const j = await r.json();
+    if(!j.ok) throw new Error(j.error || 'save failed');
+    return j.users || {};
+  }
+  function mergeRemote(users){
+    Object.keys(users).forEach(k => {
+      const isMine = me && k === me.key;
+      if(isMine && (dirty || saving)) return; // ne pas écraser mes modifs locales en cours
+      data.users[k] = sane(users[k]);
+    });
+  }
+
+  /* ---------- sauvegarde ---------- */
+  function setStatus(text, isErr){
+    const el = $('status');
+    el.textContent = text || '';
+    el.className = 'status' + (isErr ? ' err' : '');
+  }
+  function scheduleSave(){
+    dirty = true; failed = false;
+    setStatus('Modifications…');
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(flushSave, 600);
+  }
+  async function flushSave(){
+    if(saving || !dirty || !me) return;
+    saving = true; dirty = false;
+    setStatus('Enregistrement…');
+    const u = myUser();
+    u.updated = Date.now();
+    try{
+      mergeRemote(await apiSaveUser(me.key, u));
+      setStatus('Enregistré ✓');
+      setTimeout(() => { if($('status').textContent === 'Enregistré ✓') setStatus(''); }, 2500);
+    }catch(e){
+      dirty = true; failed = true;
+      setStatus('Erreur d\'enregistrement — touche ici pour réessayer', true);
+    }finally{
+      saving = false;
+      if(dirty && !failed) flushSave();
+    }
+  }
+  $('status').addEventListener('click', () => { if(failed){ failed = false; flushSave(); } });
+  window.addEventListener('beforeunload', e => { if(dirty || saving){ e.preventDefault(); e.returnValue = ''; } });
+
+  /* ---------- connexion ---------- */
+  function setLoginState(state){
+    const msg = $('login-msg'), btn = $('login-btn');
+    msg.className = 'msg';
+    if(state === 'loading'){ msg.textContent = 'Chargement…'; btn.disabled = true; }
+    else if(state === 'config'){ msg.className = 'msg err'; msg.textContent = 'L\'URL du script Google n\'est pas configurée (voir API_URL en haut du fichier).'; btn.disabled = true; }
+    else if(state === 'error'){ msg.className = 'msg err'; msg.innerHTML = 'Impossible de joindre le Google Sheet. <button class="btn ghost small" id="retry-btn" type="button">Réessayer</button>'; btn.disabled = true; }
+    else { msg.textContent = ''; btn.disabled = false; }
+  }
+  function renderKnown(){
+    const names = Object.keys(data.users).map(k => ({ k, n: data.users[k].name })).filter(x => x.n)
+      .sort((a, b) => a.n.localeCompare(b.n, 'fr'));
+    $('known').hidden = names.length === 0;
+    $('known-list').innerHTML = names.map(x => '<button type="button" class="chip" data-key="' + esc(x.k) + '">' + esc(x.n) + '</button>').join('');
+  }
+  async function loadInitial(){
+    setLoginState('loading');
+    if(!apiReady()){ setLoginState('config'); return; }
+    try{
+      mergeRemote(await apiGet());
+      setLoginState('ready');
+      renderKnown();
+    }catch(e){ setLoginState('error'); }
+  }
+  async function login(rawName){
+    const name = (rawName || '').trim();
+    if(!name) { $('pseudo').focus(); return; }
+    $('login-btn').disabled = true;
+    try{ mergeRemote(await apiGet()); }catch(e){ setLoginState('error'); return; }
+    const key = keyFor(name);
+    let isNew = false;
+    if(!data.users[key]){
+      data.users[key] = sane({ name: name });
+      isNew = true;
+    }
+    me = { key: key, name: data.users[key].name };
+    try{ localStorage.setItem(LS_KEY, me.name); }catch(e){}
+    $('who-name').textContent = me.name;
+    $('who').hidden = false;
+    $('tabbar').hidden = false;
+    $('view-login').hidden = true;
+    weekOffset = 0; editingId = null;
+    setTab(myUser().habits.length ? 'mine' : 'manage');
+    if(isNew) scheduleSave();
+    $('login-btn').disabled = false;
+  }
+  async function logout(){
+    if(dirty || saving){ clearTimeout(saveTimer); failed = false; await flushSave(); }
+    me = null;
+    $('who').hidden = true;
+    $('tabbar').hidden = true;
+    ['mine','manage','all'].forEach(t => $('view-' + t).hidden = true);
+    $('view-login').hidden = false;
+    setStatus('');
+    renderKnown();
+    setLoginState(apiReady() ? 'ready' : 'config');
+  }
+
+  $('login-btn').addEventListener('click', () => login($('pseudo').value));
+  $('pseudo').addEventListener('keydown', e => { if(e.key === 'Enter' && !$('login-btn').disabled) login($('pseudo').value); });
+  $('known-list').addEventListener('click', e => {
+    const b = e.target.closest('.chip');
+    if(b && data.users[b.dataset.key]) login(data.users[b.dataset.key].name);
+  });
+  $('login-msg').addEventListener('click', e => { if(e.target.id === 'retry-btn') loadInitial(); });
+  $('logout-btn').addEventListener('click', logout);
+
+  /* ---------- navigation ---------- */
+  function setTab(t){
+    tab = t;
+    ['mine','manage','all'].forEach(x => $('view-' + x).hidden = (x !== t));
+    document.querySelectorAll('.tab').forEach(b => b.classList.toggle('active', b.dataset.tab === t));
+    if(t === 'mine') renderMine();
+    if(t === 'manage') renderManage();
+    if(t === 'all'){ renderAll(); refreshAll(); }
+    window.scrollTo(0, 0);
+  }
+  document.querySelectorAll('.tab').forEach(b => b.addEventListener('click', () => setTab(b.dataset.tab)));
+
+  /* ---------- MES HABITUDES ---------- */
+  function renderMine(){
+    const u = myUser();
+    const days = weekDays(weekOffset);
+    const todayKey = isoDate(new Date());
+    $('week-label').textContent = weekLabel(weekOffset);
+    $('next-week').disabled = weekOffset >= 0;
+    $('prev-week').disabled = weekOffset <= -52;
+
+    const summary = $('summary');
+    const list = $('mine-list');
+    if(!u.habits.length){
+      summary.hidden = true;
+      list.innerHTML = '<div class="card"><div class="empty">Tu n\'as pas encore d\'habitude.<br><br><button class="btn" type="button" id="go-manage">Ajouter ma première habitude</button></div></div>';
+      return;
+    }
+    const st = weekStats(u, days);
+    summary.hidden = false;
+    summary.innerHTML = '<div class="big">' + st.pct + '%</div><div class="grow"><div class="bar' + (st.pct >= 100 ? ' full' : '') + '"><i style="width:' + st.pct + '%"></i></div><div class="muted" style="font-size:13px;margin-top:7px;">' + st.done + ' / ' + st.target + ' objectifs de la semaine</div></div>';
+
+    list.innerHTML = u.habits.map(h => {
+      const p = st.per[h.id];
+      const pct = Math.min(100, Math.round(p.count / h.perWeek * 100));
+      const ok = p.count >= h.perWeek;
+      const set = new Set(u.checks[h.id] || []);
+      const s = h.perWeek >= 7 ? streak(u.checks[h.id]) : 0;
+      const dayBtns = days.map((d, i) => {
+        const k = isoDate(d);
+        const future = k > todayKey;
+        const done = set.has(k);
+        const label = d.toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long' });
+        return '<button type="button" class="day' + (done ? ' done' : '') + (k === todayKey ? ' today' : '') + '" data-h="' + esc(h.id) + '" data-d="' + k + '"' + (future ? ' disabled' : '') + ' aria-pressed="' + done + '" aria-label="' + esc(h.title) + ', ' + label + '"><small>' + DAY_LETTERS[i] + '</small><span>' + d.getDate() + '</span></button>';
+      }).join('');
+      return '<article class="card"><div class="habit-head"><h3>' + esc(h.title) + '</h3><span class="count' + (ok ? ' ok' : '') + '">' + p.count + '/' + h.perWeek + (ok ? ' ✓' : '') + '</span></div>'
+        + '<div class="bar' + (ok ? ' full' : '') + '"><i style="width:' + pct + '%"></i></div>'
+        + '<div class="days">' + dayBtns + '</div>'
+        + (s >= 2 ? '<div class="streak">🔥 Série de ' + s + ' jours</div>' : '')
+        + '</article>';
+    }).join('');
+  }
+  $('mine-list').addEventListener('click', e => {
+    if(e.target.id === 'go-manage'){ setTab('manage'); return; }
+    const b = e.target.closest('.day');
+    if(!b || b.disabled) return;
+    const u = myUser();
+    const arr = u.checks[b.dataset.h] || (u.checks[b.dataset.h] = []);
+    const i = arr.indexOf(b.dataset.d);
+    if(i >= 0) arr.splice(i, 1); else arr.push(b.dataset.d);
+    scheduleSave();
+    renderMine();
+  });
+  $('prev-week').addEventListener('click', () => { weekOffset--; renderMine(); });
+  $('next-week').addEventListener('click', () => { if(weekOffset < 0){ weekOffset++; renderMine(); } });
+
+  /* ---------- OBJECTIFS (gérer) ---------- */
+  function renderManage(){
+    const u = myUser();
+    $('new-freq').innerHTML = freqOptions(7);
+    const box = $('manage-list');
+    if(!u.habits.length){
+      box.innerHTML = '<div class="empty">Aucune habitude pour l\'instant.<br>Ajoute-en une ci-dessus ☝️</div>';
+      return;
+    }
+    box.innerHTML = u.habits.map(h => {
+      if(editingId === h.id){
+        return '<div class="item"><div class="edit-box"><input type="text" data-edit-title maxlength="60" value="' + esc(h.title) + '" aria-label="Nom de l\'habitude">'
+          + '<div class="row"><select data-edit-freq aria-label="Fréquence">' + freqOptions(h.perWeek) + '</select></div>'
+          + '<div class="row"><button class="btn small" type="button" data-act="save" data-id="' + esc(h.id) + '">Enregistrer</button><button class="btn ghost small" type="button" data-act="cancel">Annuler</button></div></div></div>';
+      }
+      return '<div class="item"><div><div class="t">' + esc(h.title) + '</div><div class="s">' + freqLabel(h.perWeek) + '</div></div>'
+        + '<div class="acts"><button class="icon-btn" type="button" data-act="edit" data-id="' + esc(h.id) + '" aria-label="Modifier ' + esc(h.title) + '">✏️</button>'
+        + '<button class="icon-btn" type="button" data-act="del" data-id="' + esc(h.id) + '" aria-label="Supprimer ' + esc(h.title) + '">🗑️</button></div></div>';
+    }).join('');
+  }
+  function addHabit(){
+    const input = $('new-title');
+    const title = input.value.trim();
+    if(!title){ input.focus(); return; }
+    myUser().habits.push({ id: uid(), title: title, perWeek: parseInt($('new-freq').value, 10) || 7 });
+    input.value = '';
+    scheduleSave();
+    renderManage();
+  }
+  $('add-btn').addEventListener('click', addHabit);
+  $('new-title').addEventListener('keydown', e => { if(e.key === 'Enter') addHabit(); });
+  $('manage-list').addEventListener('click', e => {
+    const b = e.target.closest('[data-act]');
+    if(!b) return;
+    const u = myUser();
+    const act = b.dataset.act, id = b.dataset.id;
+    if(act === 'edit'){ editingId = id; renderManage(); }
+    else if(act === 'cancel'){ editingId = null; renderManage(); }
+    else if(act === 'save'){
+      const h = u.habits.find(x => x.id === id);
+      const title = document.querySelector('[data-edit-title]').value.trim();
+      if(!h || !title){ document.querySelector('[data-edit-title]').focus(); return; }
+      h.title = title;
+      h.perWeek = parseInt(document.querySelector('[data-edit-freq]').value, 10) || 7;
+      editingId = null;
+      scheduleSave();
+      renderManage();
+    }
+    else if(act === 'del'){
+      const h = u.habits.find(x => x.id === id);
+      if(!h) return;
+      if(!window.confirm('Supprimer « ' + h.title + ' » et tout son historique ?')) return;
+      u.habits = u.habits.filter(x => x.id !== id);
+      delete u.checks[id];
+      scheduleSave();
+      renderManage();
+    }
+  });
+
+  /* ---------- TOUS ---------- */
+  function renderAll(){
+    const days = weekDays(0);
+    const todayKey = isoDate(new Date());
+    const keys = Object.keys(data.users).filter(k => data.users[k].name);
+    keys.sort((a, b) => {
+      if(me && a === me.key) return -1;
+      if(me && b === me.key) return 1;
+      return data.users[a].name.localeCompare(data.users[b].name, 'fr');
+    });
+    const box = $('all-list');
+    if(!keys.length){ box.innerHTML = '<div class="card"><div class="empty">Personne pour l\'instant.</div></div>'; return; }
+    box.innerHTML = keys.map(k => {
+      const u = data.users[k];
+      const isMe = me && k === me.key;
+      const head = '<div class="user-head"><h3>' + esc(u.name) + (isMe ? '<span class="me-tag">toi</span>' : '') + '</h3>';
+      if(!u.habits.length){
+        return '<article class="card">' + head + '</div><div class="empty" style="padding:6px 0;">Pas encore d\'habitudes.</div></article>';
+      }
+      const st = weekStats(u, days);
+      const habits = u.habits.map(h => {
+        const p = st.per[h.id];
+        const ok = p.count >= h.perWeek;
+        const pct = Math.min(100, Math.round(p.count / h.perWeek * 100));
+        const dots = days.map((d, i) => '<div class="dot' + (p.flags[i] ? ' on' : '') + (isoDate(d) > todayKey ? ' future' : '') + '"></div>').join('');
+        return '<div class="mini-habit"><div class="line"><b>' + esc(h.title) + '</b><span class="count' + (ok ? ' ok' : '') + '">' + p.count + '/' + h.perWeek + (ok ? ' ✓' : '') + '</span></div>'
+          + '<div class="bar' + (ok ? ' full' : '') + '"><i style="width:' + pct + '%"></i></div><div class="dots">' + dots + '</div></div>';
+      }).join('');
+      return '<article class="card">' + head + '<span class="pct' + (st.pct >= 100 ? ' full' : '') + '">' + st.pct + '%</span></div>' + habits + '</article>';
+    }).join('');
+  }
+  async function refreshAll(){
+    const btn = $('refresh-btn');
+    btn.disabled = true;
+    try{ mergeRemote(await apiGet()); if(tab === 'all') renderAll(); }
+    catch(e){ setStatus('Impossible de rafraîchir', true); setTimeout(() => setStatus(''), 3000); }
+    btn.disabled = false;
+  }
+  $('refresh-btn').addEventListener('click', refreshAll);
+
+  /* ---------- démarrage ---------- */
+  try{ const last = localStorage.getItem(LS_KEY); if(last) $('pseudo').value = last; }catch(e){}
+  loadInitial();
+})();
+</script>
+</body>
+</html>
